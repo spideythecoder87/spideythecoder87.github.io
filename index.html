@@ -1,10 +1,27 @@
 <html>
-  <head>
-    <title>MyGames</title>
-  </head>
-  <body>
-    <a href="3dgame.html" target="_blank">3D Game</a><br/>
-    <a href="VR Workspace/index.html.html" target="_blank">VR Game</a><br/>
-     <a href="https://spideythecoder87.github.io/Frogger/Frogger/" target="_blank">Frogger game</a>
-  </body>
+<head>
+<title> Tower Defense Gameover </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+function start(){
+sjs.open();
+var background = new sjs.Image("Images/menu screen.png");
+background.setSize(500,490);
+var menu_text = new sjs.Text("   Don't let the evil robots get to the other side of the screen! use the arrow keys to change your view! choose wisely what robots to use!",28,"blue");
+menu_text.centerH();
+var startBtn = new sjs.Button("Start", function(){
+window.location = "level1.html";
+
+var info_text = new sjs.Text("Do not let the evil robots get to the other side of the screen",20,"black");
+
+menu_text.center();
+startBtn.centerH().bottom();
+});
+}
+</script>
+</head>
+<body onload="start()">
+<h1> Game Over</h1>
+<div id="target" style="overflow:hidden; background-color:green; margin:auto;"></div>
+</body>
 </html>
