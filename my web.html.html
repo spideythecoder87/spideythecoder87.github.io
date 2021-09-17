@@ -1,0 +1,91 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="main.css" />
+<title> Caleb's website </title>
+<script>
+function banner(){
+var text = confirm("Do you want to go to simplystem.com?");
+return text;
+}
+
+function answer(){
+var radio = document.getElementsByName("trivia");
+var selection = false;
+var message = "";
+for( var i = 0; i < radio.length; i++) {
+if(radio[i].value == "yes" && radio[i].checked == true) {
+selection = true;
+} //end if statement
+} //end for loop
+
+if(selection == true) {
+message = message + "<b><p style='color:green'>Way to go!</p></b>";
+} else {
+message = message + "<b><p style='color:red'>incorrect.</p></b>";
+}
+document.getElementById("response").innerHTML = message;
+
+} //end function answer
+</script>
+</head>
+<nav>
+		<ul id="navmenu">
+<li class="navitem"> <a href="home.html"> Home </a> </li>
+<li class="navitem"> <a href="https://spideythecoder87.github.io/"> Games </a> </li>
+<li class="navitem"> <a href="https://www.youtube.com/channel/UCQMiMgHQ1FDENw5y-fn2TpA"> Videos </a> </li>
+</ul>
+
+</nav>
+
+<div class="rightside">
+	<right> Caleb Konitshek  <a href="https://www.youtube.com/channel/UCQMiMgHQ1FDENw5y-fn2TpA">CLICK HERE TO VIEW MY YOUTUBE CHANNEL!!</a></right>
+
+</div
+
+
+<footer id="footer"> This website was made by Caleb Konitshek, a 10 year old student from simply coding.</footer>
+ 
+<body id="background">
+   
+	<a onclick="return banner()" href="http://simplystem.com">
+	<header id="banner"> <img width="25%" src="https://thumbs.dreamstime.com/z/cartoon-computer-9760426.jpg"/> </header>
+  </a>
+	
+	
+
+<h1> CODING </h1>
+<p> I am <u>very</u> good at coding, <b>I even made this website! I made cooler things too, lots of games, and even a 3D game too!<b> Play my games! I will put them online <i>soon!</i> more websites are coming!
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/wM1b30U95tg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	<center> Caleb Konitshek  <a href="https://spideythecoder87.github.io">CLICK HERE TO PLAY MY GAMES!</a></center>
+
+<div class="wrap-list">
+<ol>
+<li> coding is my thing! </li>
+<li> coding is challanging! </li>
+<li> I made lots of games! </li>
+<li class="listitem">learn code!</li>
+<li class="listitem">get smart!</li>
+<li class="listitem">code websites!</li>
+<p class="paragraph"><span class="wrap-text">SCROLL ALL THE WAY DOWN TO LEARN HOW TO CODE! </span> before you do this, you will have to buy almost all things. But don't worry! I will code a free website of how to learn coding! The link path will show you to a website but it will be very expensive to learn coding, like $70 or so. But check to see if you can go there! </p>
+
+
+<div class="wrap-trivia">
+HTML for TRIVIA QUESTION WOULD BE HERE...h2 tag, p tags, form tags and input tags.
+</div>
+</ol>
+<h2> Coding trivia!!!:</h2>
+<p>Is this code correct? var = new sjs.image("snake.png");</p>
+<form>
+  <div id="response"> </div>
+<input type="radio" name="trivia" value="no"> false <br>
+<input type="radio" name="trivia" value="yes"> true <br>
+<input onclick="answer()" type="button" value="submit" id="button">
+</form>
+
+<img width="30%" src="https://thumbs.dreamstime.com/z/business-abstract-computer-script-code-programing-workflow-business-abstract-computer-script-code-124596766.jpg"/>
+<img width="30%" src="https://thumbs.dreamstime.com/z/source-code-5812899.jpg"/>
+<hr />
+</div>
+<center> Caleb Konitshek  <a href="https://simplycoding.org">CLICK HERE TO LEARN CODE NOW!</a></center>
+</body>
+</html>
