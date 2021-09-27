@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Menu </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+function start(){
+sjs.open();
+var menu_text = new sjs.Text("An Astronauts' Adventure", 28, "blue");
+
+var game_text = new sjs.Text("Use the arrow Keys to move. press the space bar to enable the music. When you get your power up, press the down key to shoot. Your goal is to get the red flag blue. You can do this by walking next to the flag. Watch out for enemies!",28,"#ff0");
+game_text.centerH().offset(0, 30);
+
+menu_text.centerH();
+var designBtn = new sjs.Button("Design Level", function(){
+window.location = "platform.html";
+});
+designBtn.center();
+var level1Btn = new sjs.Button("Level 1", function(){
+window.location = "level1.html";
+});
+level1Btn.center().offset(0, 50);
+
+var info_text = new sjs.Text("Created By Caleb Konitshek", 20, "black");
+info_text.bottom().centerH();
+
+}
+</script>
+</head>
+<body onload="start()">
+<h1> Platform Game </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<html> 
+<head> 
+<title> Invaders </title> 
+<script src="https://simplycodingcourses.com/files/simply.js"></script> 
+<script>
+
+
+var shoot = true;
+var ammo = 0;
+  var w = 90;
+  var time = 0;
+  triple = false; 
+  var blocks = [];
+  var enemies = [];
+  var wave = 1;
+
+function start(){ 
+  sjs.open("target",900,500); 
+
+  var background = new sjs.Image("Images/citybackground.jpeg");
+  background.setSize(900, 500);
+
+  var player = new sjs.Image("Images/player.png");
+  player.type = "player";
+  player.setSize(75,50);
+  player.center().bottom();
+  player.lives = 3;
+
+  sjs.keyDown(LEFT_KEY, function(){
+    player.pushLeft(.7);
+  });
+
+  sjs.keyDown(RIGHT_KEY, function(){
+    player.pushRight(.7);
+  });
+
+  
+
+  sjs.keyDown(UP_KEY, function(){
+    if(shoot == true){
+      shoot = false;
+      ammo++;
+      console.log(ammo);
+      var bullet = new sjs.Image("Images/bullet.png");
+      bullet.type = "bullet";
+      bullet.setWidth(10);
+      bullet.friction = 0;
+      bullet.noBounds = true;
+      bullet.pushUp(15);
+      bullet.moveTo(player.x + 32.5, player.y - 10);
+
+      if(triple == true){
+        for(var i = 0; i<3;i++){
+        var bullet = new sjs.Image("Images/bullet.png");
+        bullet.type = "bullet";
+        bullet.setWidth(10);
+        bullet.friction = 0;
+        bullet.noBounds = true;
+        bullet.pushUp(15);
+        time++;
+        var bullet_x = 45 * Math.sin(time * .3 * Math.PI);
+        if(i == 0){
+          bullet.moveTo((player.x + 32.5)+bullet_x, player.y - 10);
+        } else if(i==1){
+          bullet.moveTo(player.x + 2.25, player.y - 10);
+          bullet.pushLeft(2);
+        } else if(i == 2){
+          bullet.moveTo(player.x + 65.75, player.y - 10);
+          bullet.pushRight(2);
+        }
+      }
+    }
+      setTimeout(function(){
+        shoot = true;
+      },w);
+    }
+  });
+	
+  //baracades
+  var j = 0;
+  var k = 10;
+  for(var i=0;i<411;i+=10){
+    var block = new sjs.Image("Images/bullet1.png");
+    blocks.push(block);
+    block.type = "block";
+    block.setWidth(10);
+    block.moveTo(90 + i, 350);
+    if(i > 150){
+      j+=10;
+      block.moveTo(90 + j, 340);
+    }
+    if(i > 290){
+      k+=10;
+      block.moveTo(90 + k, 330);
+    }
+    if(i == 410){
+      j = 0;
+      k = 10;
+      var rand = Math.floor(Math.random()*blocks.length);
+      blocks[rand].type = "special";
+    }
+  }
+    for(var i=0;i<411;i+=10){
+    var block = new sjs.Image("Images/bullet1.png");
+    blocks.push(block);
+    block.type = "block";
+    block.setWidth(10);
+    block.moveTo(350 + i, 350);
+    if(i > 150){
+      j+=10;
+      block.moveTo(350 + j, 340);
+    }
+    if(i > 290){
+      k+=10;
+      block.moveTo(350 + k, 330);
+    }
+    if(i == 410){
+      j = 0;
+      k = 10;
+      var rand = Math.floor(Math.random()*blocks.length);
+      blocks[rand].type = "special";
+    }
+  }
+
+  for(var i=0;i<411;i+=10){
+    var block = new sjs.Image("Images/bullet1.png");
+    blocks.push(block);
+    block.type = "block";
+    block.setWidth(10);
+    block.moveTo(620 + i, 350);
+    if(i > 150){
+      j+=10;
+      block.moveTo(620 + j, 340);
+    }
+    if(i > 290){
+      k+=10;
+      block.moveTo(620 + k, 330);
+    }
+    if(i == 410){
+      j = 0;
+      k = 10;
+      var rand = Math.floor(Math.random()*blocks.length);
+      blocks[rand].type = "special";
+    }
+  }
+
+
+  //onsmacks
+  sjs.onHit("bullet", "top_screen", function(x,y){
+    x.destroy();
+  });
+
+  sjs.onHit("missle", "bottom_screen", function(x,y){
+  x.destroy();
+  });
+
+
+  sjs.onHit("bullet", "missle", function(x,y){
+    x.destroy();
+    y.destroy();
+  }); 
+
+   sjs.onHit("block", ["bullet", "missle"], function(x,y){
+    x.destroy();
+    y.destroy();
+   });
+
+
+   sjs.onHit(["bullet","missle"], "special", function(x,y){
+    var powerup = new sjs.Image("Images/powerup.png");
+    powerup.type = "powerup";
+    powerup.moveTo(x.x, x.y);
+    powerup.friction = 0;
+    powerup.pushDown();
+    powerup.setSize(25, 25);
+     x.destroy();
+     y.destroy();
+   });
+
+   sjs.onHit("player", "powerup", function(x,y){
+    y.destroy();
+    triple = true;
+    ammo = 0;
+      var crazy = setInterval(function(){
+        if(ammo > 30){
+          triple = false;
+          clearInterval(crazy);
+        } 
+      },10);
+    
+   });
+
+   sjs.onHit("enemy", "right_screen",function(x,y){
+     x.stop();
+     x.moveTo(x.x,x.y+50);
+     x.pushLeft(3);
+
+   });
+
+   sjs.onHit("enemy", "left_screen",function(x,y){
+     x.stop();
+     x.moveTo(x.x,x.y+50);
+     x.pushRight(3);
+
+   });
+  sjs.onHit("enemy", "bullet", function(x,y){
+    x.destroy();
+    y.destroy();
+    sjs.removeFromArray(enemies, x);
+    if(enemies.length <=0 ){
+      wave++;
+      wave_text.setText("Wave: "+wave, 26, "red");
+      waves("Images/enemy3.png", 30);
+      }
+    });
+    
+
+  sjs.onHit("missle", "player", function(x,y){
+    x.destroy();
+    y.lives--;
+    if(y.lives == 0){
+      sjs.destroyAll();
+      var button = new sjs.Button("Restart Mission?", function(){
+        window.location = "index.html"
+      });
+      button.center();
+    }
+  });
+
+var wave_text = new sjs.Text("Wave: "+wave, 26, "red");
+wave_text.right().offset(-25, 5);
+
+setTimeout(function(){
+  waves("Images/enemy3.png", 20);
+
+},1000);
+
+} //end start
+
+function waves(image, amount){
+  for(var i = 0;i < amount*50;i+=50){
+  var enemy = new sjs.Image(image);
+  enemies.push(enemy);
+  enemy.type = "enemy";
+  enemy.setWidth(50);
+  enemy.friction = 0;
+  enemy.noBounds = true;
+  if(amount*50/2 > i){
+    enemy.moveTo(i,25);
+  } else {
+    enemy.moveTo(0,0).offset(i-(amount*50/2), 75);
+  }
+ }
+ for (j in enemies){
+   enemies[j].pushRight(3);
+ }
+ var attack = setInterval(function(){
+  var pick = Math.floor(Math.random()*enemies.length);
+   var missle = new sjs.Image("Images/missile.png"); 
+   missle.type = "missle";
+   missle.setWidth(15);
+   missle.moveTo(enemies[pick].x+35,enemies[pick].y+25);
+   missle.friction = 0;
+   missle.pushDown(6);
+   missle.noBounds = true;
+
+ },750);
+}
+
+</script> 
+</head> 
+<body onload="start()"> 
+<div id="target" style="margin:auto;background:black;border:3px solid black"></div> 
+</body> 
+</html>

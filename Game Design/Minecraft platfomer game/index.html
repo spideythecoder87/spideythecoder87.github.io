@@ -1,0 +1,32 @@
+html>
+<head>
+<title> Menu </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+function start(){
+sjs.open();
+var background = new sjs.Image("Images/Minecraft menu pic.png");
+
+var menu_text = new sjs.Text("A Minecraft Platformer", 28, "blue");
+
+var game_text = new sjs.Text("Use the arrow Keys to move. Your goal is to get to your house. Watch out for creepers, zombies, skeletons, and spiders!",28,"#ff0");
+game_text.centerH().offset(0, 30);
+
+
+var level1Btn = new sjs.Button("Level 1", function(){
+window.location = "level1.html";
+});
+level1Btn.center().offset(0, 50);
+
+var info_text = new sjs.Text("Created By Caleb Konitshek", 20, "black");
+info_text.bottom().centerH();
+
+}
+</script>
+</head>
+<body onload="start()">
+<h1> Platform Game </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>

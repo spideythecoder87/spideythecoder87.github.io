@@ -1,0 +1,63 @@
+<html> 
+<head> 
+<title> Invaders </title> 
+<script src="https://simplycodingcourses.com/files/simply.js"></script> 
+<script> 
+
+function start(){ 
+  sjs.open("target",900,500); 
+
+  var background = new sjs.Image("Images/citybackground.jpeg");
+  background.setSize(900, 500);
+
+  var player = new sjs.Image("Images/player.png");
+  player.type = "player";
+  player.setSize(75,50);
+  player.center().bottom();
+
+  sjs.keyDown(A_KEY, function(){
+    player.pushLeft(.7);
+  });
+
+  sjs.keyDown(D_KEY, function(){
+    player.pushRight(.7);
+  });
+
+  var shoot = true;
+  var w = 90;
+  var time = 0;
+  sjs.keyDown(W_KEY, function(){
+    if(shoot == true){
+      shoot = false;
+      for(var i = 0; i<3;i++){
+        var bullet = new sjs.Image("Images/bullet.png");
+        bullet.type = "bullet";
+        bullet.setWidth(10);
+        bullet.friction = 0;
+        bullet.pushUp(15);
+        time++;
+        var bullet_x = 45 * Math.sin(time * .3 * Math.PI);
+        if(i == 0){
+          bullet.moveTo((player.x + 32.5)+bullet_x, player.y - 10);
+        } else if(i==1){
+          bullet.moveTo(player.x + 2.25, player.y - 10);
+          bullet.pushLeft(2);
+        } else if(i == 2){
+          bullet.moveTo(player.x + 65.75, player.y - 10);
+          bullet.pushRight(2);
+        }
+      }
+      setTimeout(function(){
+        shoot = true;
+      },w);
+    }
+  });
+	
+} //end start
+
+</script> 
+</head> 
+<body onload="start()"> 
+<div id="target" style="margin:auto;background:black;border:3px solid black"></div> 
+</body> 
+</html>

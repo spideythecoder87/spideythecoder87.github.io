@@ -1,0 +1,54 @@
+#logo {
+width:35%;	
+}
+
+#menu {
+margin-top:10px;
+}
+
+
+#comments {
+background: radial-gradient(ellipse at 10% 25%, green, blue);border:5px solid brown;
+margin-top:5px;
+height:900px;
+width:100%;
+}
+
+
+
+#form {
+border:3px solid green;
+height:880px;
+float:right;
+margin:10px;
+background-color:lightblue;
+}
+
+#name {
+width:150px;
+margin-right:8px; }
+
+#header {
+text-align:center;
+background-color:black;
+font-size:2.5em;
+text-decoration:bold;
+color:white;
+border-radius:10px;
+margin-left:-16px;
+margin-right:-16px;
+margin-bottom:15px;
+}
+
+
+.icon{
+height: 45px;
+width: 45px;
+padding-right:10px;
+}
+
+#userComment{
+	border:2px solid green;
+	border-radius:15px;
+	width:200px;
+}

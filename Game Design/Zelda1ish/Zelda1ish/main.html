@@ -1,0 +1,124 @@
+
+<html>
+<head>
+	<script src="https://simplycoding.org/files/simplyjs/simply.js"></script> 
+	<script>
+
+		var back = 0;
+		var front = 4;
+		var left = 8;
+		var right = 12;
+
+		var walk = ["Images/back.png","Images/back2.png","Images/back3.png","Images/back4.png","Images/front.png","Images/front2.png","Images/front3","Images/front4.png","Images/left.png","Images/left2.png","left3.png","left4.png","right.png","right2.png","right3.png","right4.png"];
+		
+		function start() {
+			sjs.open("target", 800, 500);
+			var background = new sjs.Image("");
+			background.setSize(1000, 800);
+			var mapArray=[
+		 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,1,2,1,1,0,0,1,0,0,0,0,0,1,1,1,1,],
+	[0,0,0,0,0,1,1,0,0,1,2,1,1,0,0,1,0,0,0,0,0,2,2,2,2,],
+	[0,0,0,0,0,1,1,0,0,1,2,1,1,0,0,1,1,1,1,0,0,2,2,2,2,],
+	[1,0,0,0,0,1,1,0,0,1,2,2,1,0,0,1,0,0,0,0,0,1,1,1,1,],
+	[1,0,0,0,0,1,1,0,0,1,2,2,1,0,0,1,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,1,1,2,1,0,0,0,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,]
+];
+var mapX = 0;
+var mapY = 0;
+
+
+for(var i = 0;i<mapArray.length;i++){
+  for(var j = 0;j<mapArray[i].length;j++){
+    if(mapArray[i][j]==0){
+      var grass = new sjs.Image("Images/grass.jpeg");
+      grass.type="grass";
+      grass.setSize(40,40);
+      grass.moveTo(mapX, mapY);
+    }
+
+
+    if(mapArray[i][j]==1){
+      var treetop = new sjs.Image("Images/treetop.png");
+      treetop.type="treetop";
+      treetop.setSize(40,40);
+      treetop.moveTo(mapX, mapY);
+    }
+
+
+    if(mapArray[i][j]==2){
+      var treetop = new sjs.Image("Images/treetop.png");
+      treetop.type="secret";
+      treetop.setSize(40,40);
+      treetop.moveTo(mapX, mapY);
+    }
+    mapX += 40;
+  }
+  mapX=0;
+  mapY+=40;
+}
+
+var shawn = new sjs.Image("Images/right.png");
+shawn.type="shawn";
+shawn.setWidth(33);
+shawn.moveTo(0, 335);
+shawn.noBounds = true;
+shawn.friction = .2;
+
+sjs.scrollable(shawn, background);
+
+/*
+  back 0 - 3
+  front 4 - 7
+  left 8 - 11
+  right 12 - 15
+*/  
+sjs.keyDown(RIGHT_KEY, function(){
+	shawn.pushRight(1.5);
+	shawn.setImage(walk[right]);
+	right++;
+	if(right == 16){
+	  right = 12;	
+	}
+});
+
+sjs.keyDown(LEFT_KEY, function(){
+	shawn.pushLeft(1.5);
+});
+
+sjs.keyDown(UP_KEY, function(){
+	shawn.pushUp(1.5);
+});
+
+sjs.keyDown(DOWN_KEY, function(){
+	shawn.pushDown(1.5);
+});
+
+sjs.onHit("shawn","treetop",function(x,y){
+  sjs.stoppedBy(x,y);
+});
+
+sjs.onHit("shawn","right_screen",function(){
+  window.location = "mainr1.html";
+})
+			
+		}//end start
+	</script>
+</head>
+<body onload = "start()">
+	<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>

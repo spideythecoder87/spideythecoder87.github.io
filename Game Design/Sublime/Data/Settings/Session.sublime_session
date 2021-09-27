@@ -1,0 +1,562 @@
+{
+	"folder_history":
+	[
+	],
+	"last_window_id": 7,
+	"settings":
+	{
+		"new_window_height": 405.0,
+		"new_window_settings":
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"get",
+						"getHeight"
+					],
+					[
+						"ke",
+						"keyDown"
+					],
+					[
+						"r_",
+						"r_facing"
+					],
+					[
+						"g",
+						"getWidth"
+					],
+					[
+						"set",
+						"setSize"
+					],
+					[
+						"fun",
+						"function"
+					],
+					[
+						"Imag",
+						"Image"
+					],
+					[
+						"t",
+						"true"
+					]
+				]
+			},
+			"build_system": "",
+			"command_palette":
+			{
+				"height": 392.0,
+				"selected_items":
+				[
+				],
+				"width": 416.0
+			},
+			"console":
+			{
+				"height": 0.0
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/win4.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/level4.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/level6.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/level5.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/win5.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/gameover.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/index.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/fish.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/luke game",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/Dodge.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/Dodgegameover.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/Dodge!.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/platform.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Pong/pong.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Pong/gameover.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Pong/index.html"
+			],
+			"find":
+			{
+				"height": 0.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"incremental_find":
+			{
+				"height": 0.0
+			},
+			"input":
+			{
+				"height": 0.0
+			},
+			"layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			},
+			"menu_visible": true,
+			"replace":
+			{
+				"height": 0.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 150.0,
+			"status_bar_visible": true
+		},
+		"new_window_width": 640.0
+	},
+	"windows":
+	[
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"get",
+						"getHeight"
+					],
+					[
+						"ke",
+						"keyDown"
+					],
+					[
+						"r_",
+						"r_facing"
+					],
+					[
+						"g",
+						"getWidth"
+					],
+					[
+						"set",
+						"setSize"
+					],
+					[
+						"fun",
+						"function"
+					],
+					[
+						"Imag",
+						"Image"
+					],
+					[
+						"t",
+						"true"
+					]
+				]
+			},
+			"buffers":
+			[
+				{
+					"file": "/C/Users/Lui's computer/Desktop/coding/responsive/index.html",
+					"settings":
+					{
+						"buffer_size": 5688,
+						"line_ending": "Windows"
+					}
+				},
+				{
+					"contents": "<html>\n<head>\n     <title>My Games</title>\n</head>\n<body>\n \n<a href=\"3dgame.html\">3D Game</a>\n<br/>\n<a href=\"Frogger/Frogger/index.html\">Frogger Game</a>\n<br/>\n<a href=\"VR Workspace/index.html.html\">VR Game  coming soon!!!</a>\n<br/>\n<a href=\"myweb.html.html\">my coding website</a>\n<br/>\n     \n</body>\n</html>",
+					"file": "/C/Users/Lui's computer/Desktop/coding/main tree/main.html",
+					"file_size": 323,
+					"file_write_time": 132771657649511464,
+					"settings":
+					{
+						"buffer_size": 308,
+						"line_ending": "Windows"
+					}
+				},
+				{
+					"file": "/C/Users/Lui's computer/Desktop/coding/responsive/stylesheet.css",
+					"settings":
+					{
+						"buffer_size": 661,
+						"line_ending": "Windows"
+					}
+				},
+				{
+					"file": "/C/Users/Lui's computer/Desktop/coding/responsive/jspractice.html",
+					"settings":
+					{
+						"buffer_size": 267,
+						"line_ending": "Windows"
+					}
+				}
+			],
+			"build_system": "",
+			"command_palette":
+			{
+				"height": 392.0,
+				"selected_items":
+				[
+				],
+				"width": 416.0
+			},
+			"console":
+			{
+				"height": 0.0
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/C/Users/Lui's computer/Desktop/coding/websites1/main.css",
+				"/C/Users/Lui's computer/Desktop/coding/websites1/home.html",
+				"/C/Users/Lui's computer/Desktop/coding/websites1/games.html",
+				"/C/Users/Lui's computer/Desktop/coding/websites1/videos.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/level1.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/level2.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/level3.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/level5.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Yoshi in Space/Yoshi in Space.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/chase/chase.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design 2/Game Design 2/Tower Defense/level1.html",
+				"/C/Users/Lui's computer/Desktop/coding/3d+Game+Design/3d Game Design/3dgame.html",
+				"/C/Users/Lui's computer/Desktop/coding/3d+Game+Design/3d Game Design/3dgame2.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design 2/Game Design 2/Tower Defense/level2.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design 2/Game Design 2/Tower Defense/level3.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design 2/Game Design 2/Tower Defense/index.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design 2/Game Design 2/Tower Defense/game over.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/Minecraft platformer level maker.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/level1.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/index.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/win1.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/win5.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/level6.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/level7.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/win2.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/index.html",
+				"/C/Users/Lui's computer/Desktop/coding/VR+Workspace/VR Workspace/VR Workspace/VRescape.html",
+				"/C/Users/Lui's computer/Desktop/coding/VR+Workspace/VR Workspace/VR Workspace/index.html.html",
+				"/C/Users/Lui's computer/Desktop/coding/websites1/reference.html",
+				"/C/Users/Lui's computer/Desktop/coding/websites1/index.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/game over.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/gameover.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/win.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/win2.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/win3.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/level2.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/level3.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/level4.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/level5.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/level6.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/level7.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/win3.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/win4.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/win5.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/win6.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/win7.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/test.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Minecraft platfomer game/test.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/win.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/win6.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/win7.html",
+				"/C/Users/Lui's computer/Desktop/coding/websites1/positions.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/win4.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/level4.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/gameover.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/index.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/fish.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/luke game",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/Dodge.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/Dodgegameover.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Fish/Dodge!.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Platform/platform.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Pong/pong.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Pong/gameover.html",
+				"/C/Users/Lui's computer/Desktop/coding/Game Design/Pong/index.html"
+			],
+			"find":
+			{
+				"height": 0.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"groups":
+			[
+				{
+					"selected": 0,
+					"sheets":
+					[
+						{
+							"buffer": 0,
+							"file": "/C/Users/Lui's computer/Desktop/coding/responsive/index.html",
+							"settings":
+							{
+								"buffer_size": 5688,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										3896,
+										3896
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/HTML/HTML.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 2115.0,
+								"zoom_level": 1.0
+							},
+							"type": "text"
+						},
+						{
+							"buffer": 1,
+							"file": "/C/Users/Lui's computer/Desktop/coding/main tree/main.html",
+							"settings":
+							{
+								"buffer_size": 308,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										308,
+										308
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/HTML/HTML.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"type": "text"
+						},
+						{
+							"buffer": 2,
+							"file": "/C/Users/Lui's computer/Desktop/coding/responsive/stylesheet.css",
+							"settings":
+							{
+								"buffer_size": 661,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										659,
+										659
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/CSS/CSS.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 494.0,
+								"zoom_level": 1.0
+							},
+							"type": "text"
+						},
+						{
+							"buffer": 3,
+							"file": "/C/Users/Lui's computer/Desktop/coding/responsive/jspractice.html",
+							"settings":
+							{
+								"buffer_size": 267,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										91,
+										91
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/HTML/HTML.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"type": "text"
+						}
+					]
+				}
+			],
+			"incremental_find":
+			{
+				"height": 0.0
+			},
+			"input":
+			{
+				"height": 0.0
+			},
+			"layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			},
+			"menu_visible": true,
+			"position": "0,0,1,-1,-1,-1,-1,697,272,233,928",
+			"replace":
+			{
+				"height": 0.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 150.0,
+			"status_bar_visible": true,
+			"window_id": 2,
+			"workspace_name": ""
+		}
+	],
+	"workspaces":
+	{
+		"recent_workspaces":
+		[
+		]
+	}
+}

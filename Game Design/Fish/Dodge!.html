@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Dodge!</title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+function start(){
+sjs.open("target", 800, 500);
+//Background Music
+var playM = new Audio('Music/mad_robots.mp3');
+var toggle = true;
+var musicOn = false;
+sjs.keyDown(SPACE_KEY, function(){
+if(toggle == true){
+if(musicOn == false){
+playM.play();
+musicOn = true;
+} else {
+playM.pause();
+musicOn = false;
+}
+toggle = false;
+setTimeout(function(){
+toggle = true;
+},1000);
+} //end if toggle statement
+}); //end keyDown function
+var ba
+var background = new sjs.Image("Images/space.png");
+background.setSize(sjs.getWidth(), sjs.getHeight());
+
+//Player Properties below here
+var player = new sjs.Image("Images/titan_left.png");
+player.type = "player";
+player.setSize(100,50);
+player.friction = .1;
+player.accel = .5;
+sjs.keyDown(RIGHT_KEY, function(){
+player.setImage("Images/titan_right.png");
+player.pushRight();
+});
+
+sjs.keyDown(LEFT_KEY, function(){
+player.setImage("Images/titan_left.png");
+player.pushLeft();
+});
+
+sjs.keyDown(UP_KEY, function(){
+player.pushUp();
+});
+
+sjs.keyDown(DOWN_KEY, function(){
+player.pushDown();
+});
+
+//Enemies
+setInterval(function(){
+var speed = Math.round(1 + Math.random()*10);
+if(Math.random() > 0.5){
+var enemy = new sjs.Image("Images/medfighter_right.png");
+enemy.type = "enemy";
+enemy.setSize(100,50);
+enemy.noBounds = true;
+enemy.friction = 0;
+enemy.pushRight(speed);
+enemy.scaleSize(.5 + Math.random() * 1.2);
+enemy.moveTo(-enemy.getWidth(), Math.random()*(enemy.getClamp().y));
+}else {
+var enemy = new sjs.Image("Images/medfighter_left.png");
+enemy.type = "enemy";
+enemy.setSize(100,50);
+enemy.noBounds = true;
+enemy.friction = 0;
+enemy.pushLeft(speed);
+enemy.scaleSize(.5 + Math.random() * 1.2);
+enemy.moveTo(sjs.getWidth(), Math.random()*(enemy.getClamp().y));
+}
+},1000);
+
+sjs.onHit("player","enemy", function(player,enemy){
+ 
+ window.location = "Dodgegameover.html"  
+});
+
+sjs.left_screen.offset(-500);
+sjs.right_screen.offset(500);
+
+sjs.onHit("enemy",["right_screen","left_screen"], function(x,y){
+	x.destroy();
+
+});
+
+
+
+} //end start
+</script>
+</head>
+<body onload="start()">
+<h1> Dodge! </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>

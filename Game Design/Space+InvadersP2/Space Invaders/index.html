@@ -1,0 +1,245 @@
+<html> 
+<head> 
+<title> Invaders </title> 
+<script src="https://simplycodingcourses.com/files/simply.js"></script> 
+<script> 
+
+var w = 900;
+var ammo = 0;
+var w_shoot = true;
+var time = 0;
+var bad_guys = [];
+
+function start(){ 
+  sjs.open("target",900,500); 
+
+  var player = new sjs.Image("Images/player.png");
+  player.type = "player";
+  player.center().bottom();
+  player.setSize(75,50);
+  player.lives = 3;
+  
+  
+  var powerup = new sjs.Image("Images/missile.png");
+  powerup.type="powerup";
+  powerup.right().bottom();
+  powerup.setWidth(10);
+
+  sjs.onHit("player", "powerup", function(x,y){
+        y.destroy();
+        rapid();
+  });
+
+
+  sjs.keyDown(W_KEY, function(){
+  	if(w_shoot == true){
+      ammo++;
+      console.log(ammo + " , " + w);
+  		w_shoot = false;
+		  var bullet = new sjs.Image("Images/bullet.png");
+		  bullet.type = "bullet";
+		  bullet.noBounds = true;
+		  bullet.setWidth(10);
+		  bullet.pushUp(12);
+		  bullet.friction = 0;
+		  bullet.moveTo(player.x+32, player.y-7);
+
+
+
+
+		  // Sine Curve
+	  	time++;
+	  	var bullet_x = 42*Math.sin(time * .3 * Math.PI);
+	  	bullet.moveTo((player.x+32)+bullet_x,player.y-7);
+
+	  	//3 at once
+// 		  for(var i = 0; i < 3; i++){
+// 		  	var bullet = new sjs.Image("Images/bullet.png");
+// 			  bullet.type = "bullet";
+// 			  bullet.noBounds = true;
+// 			  bullet.setWidth(10);
+// 			  bullet.pushUp(12);
+// 			  bullet.friction = 0;
+// 
+// 		  	if(i == 0){
+// 				  bullet.moveTo(player.x+32, player.y-7);
+// 				} else if(i == 1){
+// 					bullet.moveTo(player.x+3, player.y-3);
+// 			  } else if(i == 2){
+// 			  	bullet.moveTo(player.x+65, player.y-3);
+// 			  }
+// 		  }
+		  
+	     setTimeout(function(){
+	  		w_shoot = true;
+	   },w);
+		} else {
+			return;
+		}
+  });
+
+	var k = 0;
+	var l = 10;
+  for(var j = 0; j < 420; j+=10){
+  	var block = new sjs.Image("Images/bullet1.png");
+  	block.type = "block";
+  	block.setWidth(10);
+  	block.moveTo(90+j,350);
+  	if(j > 150){
+  		k+=10;
+  		block.moveTo(90+k, 340);
+  	} 
+  	if(j > 290){
+  		l+=10;
+  		block.moveTo(90+l, 330);
+  	}
+  }
+
+  var m = 0;
+	var n = 10;
+  for(var j = 0; j < 420; j+=10){
+  	var block = new sjs.Image("Images/bullet1.png");
+  	block.type = "block";
+  	block.setWidth(10);
+  	block.moveTo(650+j,350);
+  	if(j > 150){
+  		m+=10;
+  		block.moveTo(650+m, 340);
+  	} 
+  	if(j > 290){
+  		n+=10;
+  		block.moveTo(650+n, 330);
+  	}
+  }
+
+  var o = 0;
+  var p = 10;
+  for(var j = 0; j < 300; j+=10){
+    var block = new sjs.Image("Images/bullet1.png");
+    block.type = "block";
+    block.setWidth(10);
+    block.moveTo(380+j,350);
+    if(j > 110){
+      o+=10;
+      block.moveTo(380+o, 340);
+    } 
+    if(j > 210){
+      p+=10;
+      block.moveTo(380+p, 330);
+    }
+  }
+
+  sjs.keyDown(LEFT_KEY, function(){
+  	player.pushLeft(.7);
+  });
+  sjs.keyDown(RIGHT_KEY, function(){
+  	player.pushRight(.7);
+  });
+
+  //Enemy
+  var count = 0;
+  var enemies = setInterval(function(){
+    count++;
+  	var enemy = new sjs.Image("Images/enemy3.png");
+    bad_guys.push(enemy);
+  	enemy.setWidth(50);
+  	enemy.type="enemy";
+  	enemy.pushRight(2);
+  	enemy.friction = 0;
+  	enemy.noBounds = true;
+    if(count == 25){
+      clearInterval(enemies);
+    }
+  },1500);
+
+  setTimeout(function(){
+    var attack = setInterval(function(){
+      var drop = Math.random();
+      if(drop > .3){
+        var pick = Math.floor(Math.random()*bad_guys.length);
+        var bomb = new sjs.Image("Images/missile.png");
+        bomb.type="bomb";
+        bomb.setWidth(5);
+        bomb.moveTo(bad_guys[pick].x+35, bad_guys[pick].y+25);
+        bomb.pushDown(2);
+        bomb.friction = 0;
+        bomb.noBounds = true;
+      }
+    },1000);
+  },3000);
+
+  sjs.onHit("enemy","right_screen",function(x,y){
+  	x.stop();
+  	x.moveTo(x.x, x.y+50);
+  	x.pushLeft(2);
+  });
+
+  sjs.onHit("enemy","left_screen",function(x,y){
+  	x.stop();
+  	x.moveTo(x.x, x.y+50);
+  	x.pushRight(2);
+  });
+
+  
+  sjs.onHit("bullet", "top_screen", function(x,y){
+  	x.destroy();
+  });
+
+  var enemies_shot = 0;
+  sjs.onHit("bullet", "enemy", function(x,y){
+    x.destroy();
+    y.destroy();
+    //sjs.removeFromArray(bad_guys, y);
+    for(var i = 0; i < bad_guys.length; i++){
+      if(bad_guys[i] == y){
+        bad_guys.splice(i,1);
+        i--;
+        enemies_shot++;
+      }
+    }
+    console.log(bad_guys.length);
+    if(enemies_shot >= 25){
+      clearInterval(attack);
+    }
+  });
+
+  sjs.onHit("bomb", "player", function(x,y){
+    x.destroy();
+    y.lives--;
+    if(y.lives <= 0){
+      y.destroy();
+    }
+  });
+
+   sjs.onHit(["bullet","bomb"],"block", function(x,y){
+   	x.destroy();
+   	y.destroy();
+   });
+
+   sjs.onHit("bomb", "bottom_screen", function(x,y){
+    x.destroy();
+  });
+} //end start
+
+function rapid(){
+  ammo = 0;
+  var pump = setInterval(function(){
+    if(ammo < 200){
+      w = 10;
+    } else {
+      w = 900;
+      clearInterval(pump);
+      return;
+    }
+  },10);
+}
+
+
+
+
+</script> 
+</head> 
+<body onload="start()"> 
+<div id="target" style="margin:auto;background:black;border:3px solid black"></div> 
+</body> 
+</html>

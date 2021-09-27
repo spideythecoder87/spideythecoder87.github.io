@@ -1,0 +1,213 @@
+
+<html>
+<head>
+	<script src="https://simplycoding.org/files/simplyjs/simply.js"></script> 
+	<script>
+
+		/*
+			back 0 - 3
+			front 4 - 7
+			left 8 - 11
+			right 12 - 15
+		*/
+		
+	
+		var back = 0;
+		var front = 4;
+		var left = 8;
+		var right = 12;
+		var amount = 20;
+		var health = 2;
+
+		var walk = ["Images/back.png","Images/back2.png","Images/back3.png","Images/back4.png","Images/front.png","Images/front2.png","Images/front3.png","Images/front4.png","Images/left.png","Images/left2.png","Images/left3.png","Images/left4.png","Images/right.png","Images/right2.png","Images/right3.png","Images/right4.png"];
+
+		var inv = [];
+		
+		function start() {
+			sjs.open("target", 800, 500);
+
+			var background = new sjs.Image("");
+			background.setSize(1000, 800);
+
+
+
+			var mapArray=[
+	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,1,2,1,1,0,0,1,0,0,0,0,0,1,1,1,1,],
+	[0,0,0,0,0,1,1,0,0,1,2,1,1,0,0,1,0,0,0,0,0,2,2,2,2,],
+	[0,0,0,0,0,1,1,0,0,1,2,1,1,0,0,1,1,1,1,0,0,2,2,2,2,],
+	[1,0,0,0,0,1,1,0,0,1,2,2,1,0,0,1,0,0,0,0,0,1,1,1,1,],
+	[1,0,0,0,0,1,1,0,0,1,3,2,1,0,0,1,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,1,1,2,1,0,0,0,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+	[1,0,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,]
+];
+
+	var mapX = 0;
+	var mapY = 0;
+
+	for(var i = 0;i<mapArray.length;i++){
+		for(var j = 0;j<mapArray[i].length;j++){
+			if(mapArray[i][j]==0){
+				var grass = new sjs.Image("Images/grass.jpeg");
+				grass.type="grass";
+				grass.setSize(40,40);
+				grass.moveTo(mapX, mapY);
+			}
+			if(mapArray[i][j]==1){
+				var treetop = new sjs.Image("Images/treetop.png");
+				treetop.type="treetop";
+				treetop.setSize(40,40);
+				treetop.moveTo(mapX, mapY);
+			}
+			if(mapArray[i][j]==2){
+				var treetop = new sjs.Image("Images/treetop.png");
+				treetop.type="secret";
+				treetop.setSize(40,40);
+				treetop.moveTo(mapX, mapY);
+			}
+			if(mapArray[i][j]==3){
+				var button = new sjs.Image("Images/treetopRed.png");
+				button.type="button";
+				button.setSize(40,40);
+				button.moveTo(mapX, mapY);
+			}
+			mapX += 40;
+		}
+		mapX=0;
+		mapY+=40;
+	}
+
+	var shawn = new sjs.Image("Images/right.png");
+	shawn.type="shawn";
+	shawn.setWidth(33);
+	shawn.moveTo(0, 335);
+	shawn.noBounds = true;
+	shawn.friction = .2;
+
+	
+	sjs.scrollable(shawn, background);
+
+	//OBJECTS
+
+	var inventory = new sjs.Image("Images/whiteCircle.png");
+	inventory.moveTo(0,410);
+	inventory.fixed = true;
+	inventory.node.style.zIndex = -1;
+
+		/*
+			back 0 - 3
+			front 4 - 7
+			left 8 - 11
+			right 12 - 15
+		*/
+
+	sjs.keyDown(RIGHT_KEY, function(){
+		shawn.pushRight(1.5);
+		shawn.setImage(walk[right]);
+		right++;
+		if(right == 16){
+			right = 12;
+		}
+	});
+
+	sjs.keyDown(UP_KEY, function(){
+		shawn.pushUp(1.5);
+		shawn.setImage(walk[back]);
+		back++;
+		if(back == 4){
+			back = 0;
+		}
+	});
+
+	sjs.keyDown(LEFT_KEY, function(){
+		shawn.pushLeft(1.5);
+		shawn.setImage(walk[left]);
+		left++;
+		if(left == 12){
+			left = 8;
+		}
+	});
+
+	sjs.keyDown(DOWN_KEY, function(){
+		shawn.pushDown(1.5);
+		shawn.setImage(walk[front]);
+		front++;
+		if(front == 8){
+			front = 4;
+		}
+	});
+
+	sjs.onHit("shawn","treetop",function(x,y){
+		sjs.stoppedBy(x,y);
+	});
+
+	sjs.onHit("shawn","right_screen",function(){
+		window.location = "mainr1.html";
+	});
+
+	sjs.onHit("shawn", "button", function(x,y){
+		y.type = "none";
+		var sword = new sjs.Image("Images/swordD.png");
+		sword.type = "sword";
+		sword.moveTo(14*40, 10*40);
+		enemies(amount, health);
+	});
+
+	sjs.onHit("shawn", "sword", function(x,y){
+		y.type = "attack";
+		inv.push(y);
+		show(inventory);
+	});
+
+}//end start
+	
+function show(white){
+	white.node.style.zIndex = 0;
+	setTimeout(function(){
+		white.node.style.zIndex = -1;
+	},1550);
+
+		inv[inv.length-1].moveTo(white.getWidth()/2-inv[inv.length-1].getWidth()/2, white.y+2);
+		inv[inv.length-1].fixed = true;
+		// scroll = inv.length-1;
+
+}	
+
+function enemies(amount, health){
+  for(var i = 0; i < amount; i++){
+  	var pos_x = Math.round(40+Math.random()*920);
+  	var pos_y1 = Math.round(40+Math.random()*80);
+  	var pos_y2 = Math.round(610+Math.random()*80);
+  	var y_array = [pos_y1, pos_y2];
+  	var r = Math.round(Math.random());
+  	var speed = Math.round(Math.random()*7);
+  	var blob = new sjs.Image("Images/venom_right.png");
+  	blob.type = "blob";
+  	blob.pushRight(speed);
+  	blob.moveTo(pos_x, y_array[r]);
+  	blob.friction = 0;
+  	blob.bounce();
+  	blob.setHFlipImages("Images/venom_right.png","Images/venom_left.png");
+    blob.health = health;
+  }
+}
+		
+
+	</script>
+</head>
+<body onload = "start()">
+	<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="stylesheet.css">
+<title> Comment Post </title>
+</head>
+<script>
+var array = [];
+function validate(){
+//VARIABLES
+var name = document.querySelector("#name");
+var title = document.querySelector("#title");
+var textarea = document.querySelector("#textarea");
+var textColor = document.querySelector("#textColor");
+var bgColor = document.querySelector("#bgColor");
+var radiobtns = document.querySelector("#radiobtns");
+var icons = document.querySelectorAll("[name='icon']");
+var message = document.querySelector("#message");
+
+var radio_choice = false;
+var blank_field = true;
+if(name.value == ""){
+name.style.border = "2px solid red";
+blank_field = true;
+} else {
+name.style.border = "2px solid green";
+blank_field = false;
+}
+
+if(textColor.value == "Choose a Color"){
+textColor.style.border = "2px solid red";
+blank_field = true;
+} else {
+textColor.style.border = "2px solid green";
+blank_field = false;
+}
+
+if(textarea.value == ""){
+textarea.style.border = "2px solid red";
+blank_field = true;
+} else {
+textarea.style.border = "2px solid green";
+blank_field = false;
+}
+
+if(textarea.value == ""){
+textarea.style.border = "2px solid red";
+blank_field = true;
+} else {
+textarea.style.border = "2px solid green";
+blank_field = false;
+}
+
+if(bgColor.value == "Choose a Background Color"){
+bgColor.style.border = "2px solid red";
+blank_field = true;
+} else {
+bgColor.style.border = "2px solid green";
+blank_field = false;
+}
+
+for(var i=0; i < icons.length; i++){
+   if(icons[i].checked == true){
+   	radio_choice = true;
+   	radiobtns.style.border = "none";
+   	break;
+
+
+   } else {
+radio_choice = false;
+radiobtns.style.border = "2px solid red";
+}
+} //end for loop
+
+
+if(blank_field == false && radio_choice == true){
+message.innerHTML = "";
+save();
+} else {
+message.innerHTML = "<h3 style='color:red'>Please fill out these forms/this form!</h3>";
+}
+
+} //end function validate
+function save(){
+	/* Variables */
+var name = document.querySelector("#name");
+var title = document.querySelector("#title");
+var textarea = document.querySelector("#textarea");
+var icon = document.querySelectorAll("[name='icon']");
+var icon_value;
+var textColor = document.querySelector("#textColor");
+var bgColor = document.querySelector("#bgColor");
+for(var i=0; i < icon.length; i++){
+if(icon[i].checked == true){
+icon_value = icon[i].value;
+
+}
+}
+var storage = {name: name.value, title: title.value, textarea: textarea.value, icon: icon_value, textColor: textColor.value, bgColor: bgColor.value};
+array.push(storage);
+
+display();
+} //end function save
+
+function display(){
+var show = document.querySelector("#show");
+var post = "";
+for(var i=0; i < array.length; i++){
+	post += "<div id='usercomment' style='background-color:"+array[i].bgColor+"; "+"color:"+array[i].textColor+";'>";
+	post += "<input type='checkbox' onclick='gone("+i+");'/>";
+	post += "<img src='"+array[i].icon+"' class='icon' />";
+post += "<strong> "+array[i].name+ "</strong><br>";
+post += "<strong> "+array[i].title+ "</strong><br>";
+post += array[i].textarea;
+post += "</div>";
+show.innerHTML = post;
+}
+} //end function display
+
+
+function gone(index){
+array.splice(index,1);
+display();
+}
+</script>
+<body>
+<div class="container">
+<div class="container">
+
+<div class="container">
+
+<div class="row">
+	<div class="col-sm-4">
+<img id="logo" class="img-responsive" src="mylogo.png" />
+
+<textarea class="form-control" rows="8"></textarea>
+
+<input onclick="validate()" class="btn btn-default" type="button" value="Submit Comment">
+</div>
+ <!-- end logo row -->
+
+<div class="row">
+<div class="col-sm-12" id="menu">
+<nav class="navbar navbar-expand bg-info navbar-light">
+<ul class="navbar-nav">
+<li class="nav-item">
+<a class="nav-link" href="#">Home</a>
+</li>
+<li class="nav-item">
+<a href="../index.html">Games</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">About Me</a>
+</li>
+<ul>
+</nav>
+</div>
+</div> <!-- end menu row -->
+
+<div class="row">
+<div class="col-sm-12" id="comments">COMMENTS
+	<div id="form" class="col-sm-12 col-md-5">
+<header id="header"> Leave a Comment</header>
+<div id="message"></div>
+<form class="form-inline">
+<label>Name: </label>
+<input type="text" class="form-control" id="name" placeholder="Enter Name">
+<label>Color: </label>
+<select id="textColor" class="form-control">
+<option>Choose a Color</option>
+<option>Red</option>
+<option>Blue</option>
+<option>White</option>
+<option>Orange</option>
+</select>
+</form>
+<form>
+<label>Title: </label>
+<input type="text" class="form-control" id="title" placeholder="Comment Title">
+<label>Background Color: </label>
+<select id="bgColor" class="form-control">
+<option>Choose a Background Color </option>
+<option>Pink </option>
+<option>Green </option>
+<option>Black </option>
+<option>Orange </option>
+</select>
+</form>
+<form class="form-inline"
+	id="radiobtns">
+<label> Icons: </label>
+<input type="radio" name="icon"value="mylogo.png">
+<img src="mylogo.png" class="icon" />
+
+<input type="radio" name="icon" value="laptop.png">
+<img src="laptop.png" class="icon" />
+
+<input type="radio" name="icon"value="game controller.png">
+<img src="game controller.png" class="icon" />
+
+<input type="radio" name="icon"value="pacman.png">
+<img src="pacman.png" class="icon" />
+
+</form>
+
+<label>Comment: </label> <br>
+
+<textarea id="textarea" class="form-control" rows="8"></textarea> <br>
+
+<input class="btn btn-primary" type="button" value="Submit Comment">
+
+
+</div> <!-- end form id div -->
+<div id="show"></div>
+</div> <!-- end comments row -->
+
+</div> <!-- end container div -->
+
+</div> <!-- end container div -->
+</div>
+</body>
+</html>

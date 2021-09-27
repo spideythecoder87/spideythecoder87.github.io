@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Menu </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+function start(){
+sjs.open();
+var menu_text = new sjs.Text("Menu",28,"green")
+menu_text.centerH();
+var game_text = new sjs.Text("Hi! Welcome to Pong With a Planet! Move the paddles with the arrow keys. Don't let the ball hit the ground or the ceiling. Your score will go up by 1 When you have 15 points, you will have to play with 2 planets!. Have fun!",28,"#ff0");
+game_text.centerH().offset(0, 30);
+
+var startBtn = new sjs.Button("Play!", function(){
+window.location = "pong.html";
+});
+startBtn.center();
+
+var info_text = new sjs.Text("Created by Caleb Konitshek",20,"black");
+info_text.bottom().centerH();
+
+sjs.onHit("ball",["top_screen","bottom_screen"],
+function(){
+	window.location = "gameover.html";
+
+});
+
+
+
+} //end start
+</script>
+</head>
+<body onload="start()">
+<h1> Menu </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
