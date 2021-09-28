@@ -1,0 +1,297 @@
+<html>
+<head>
+<title> Minecraft level maker </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+<script>
+var level = [];
+function start(){
+sjs.open("target",800,500);
+
+
+
+var background = new sjs.Image("Images/Minecraft World.png");
+background.setSize(2500, 500);
+
+var testBtn = new sjs.Button("test", function(){
+localStorage.setItem('level', sjs.saveImageArray(level));
+window.open('test.html', '_blank');
+});
+var showBtn = new sjs.Button("Show", function(){
+var output = document.querySelector("#output");
+output.innerHTML = sjs.saveImageArray(level);
+});
+
+showBtn.offset(75, 0);
+
+//Player Properties
+var player = new
+sjs.Image("Images/Minecraft Player.png");
+player.type = "player";
+player.setSize(85,93);
+player.setGravity(3);
+player.bottom();
+player.friction = .3;
+player.noBounds = true;
+sjs.scrollable(player,background);
+
+//player controls
+
+
+
+sjs.keyDown(RIGHT_KEY, function(){
+
+player.pushRight(2);
+
+
+
+}); //end Right key
+
+sjs.keyDown(LEFT_KEY, function(){
+
+player.pushLeft(2);
+
+
+}); //end Left key
+
+//Jumping Code
+var canJump = true;
+sjs.keyDown(UP_KEY, function(){
+if(canJump == true){
+canJump = false;
+player.pushUp(55);
+
+
+} //end canJump if statement
+}); //end keyDown function
+
+sjs.onHit("player","bottom_screen",function(x,y){
+sjs.stoppedBy(x,y);
+if(canJump == false){
+canJump = true;
+
+}
+});
+var canShoot = false;
+sjs.onHit("player","powerUp", function(x,y){
+canShoot = true;
+y.destroy();
+});
+
+sjs.onHit("player",["right_screen","left_screen","top_screen"],function(x,y){
+sjs.stoppedBy(x,y);
+});
+
+sjs.onHit("enemy","bottom_screen", function(x,y){
+sjs.stoppedBy(x,y);
+});
+
+sjs.onHit("enemy",["left_screen","right_screen"], function(x,y){
+sjs.bounceOff(x,y);
+});
+
+sjs.onHit("enemy","platform", function(x,y){
+if(x.isAboveOf(y) == true){
+	sjs.stoppedBy(x,y);
+	} else {
+	sjs.bounceOff(x,y);
+	}
+	});
+
+
+window.addEventListener("keyup", function(e){
+	if(e.keyCode == RIGHT_KEY){
+		player.setImage("Images/Minecraft Player.png");
+
+
+} else if (e.keyCode == LEFT_KEY){
+	player.setImage("Images/Minecraft Player.png");
+
+
+
+} //end if statement
+
+}); //end EventListener function
+
+
+sjs.onHit("player","platform",function(x,y){
+sjs.stoppedBy(x,y);
+if(canJump == false && x.y < y.y-85){
+canJump = true;
+
+}
+});
+
+
+sjs.onHit("player",["right_screen","left_screen","top_screen"],function(x,y){
+sjs.stoppedBy(x,y);
+});
+
+sjs.onHit("trash",["platform","jump_pad", "powerUp","score","enemy","flag"], function(x,y){
+y.destroy();
+sjs.removeFromArray(level,y)
+});
+
+var trash = new sjs.Text("Trash",15,"orange");
+trash.type = "trash";
+trash.moveTo(720,10);
+trash.fixed = true;
+trash.setHeight(60);
+trash.node.style.background = "green";
+trash.node.style.borderTop = "4px solid yellow";
+} //end start
+//Platform Function
+
+function platform(){
+var platform = new sjs.Image("Images/Minecraft Block.png");
+level.push(platform);
+platform.type = "platform";
+platform.setHeight(30);
+platform.center().offset(-sjs.gx,10);
+platform.onMouseDown(function(){
+platform.draggable();
+platform.follow(sjs.mouse);
+});
+}
+
+function powerUp(){
+var powerUp = new sjs.Image("Images/Minecraft Diamond sword.png");
+level.push(powerUp);
+powerUp.type = "powerUp";
+powerUp.setHeight(30);
+powerUp.center().offset(-sjs.gx,10);
+powerUp.onMouseDown(function(){
+powerUp.draggable();
+powerUp.follow(sjs.mouse);
+});
+}
+
+
+
+
+
+
+function flag(){
+	var flag = new sjs.Image("Images/Minecraft House.png");
+level.push(flag);
+flag.type = "flag";
+flag.setHeight(80);
+flag.center().offset(-sjs.gx,10);
+flag.onMouseDown(function(){
+flag.draggable();
+flag.follow(sjs.mouse);
+});
+
+}
+function enemy(){
+	var enemy1= new sjs.Image("Images/Minecraft Zombie.png");
+level.push(enemy1);
+enemy1.type = "enemy";
+enemy1.center().offset(-sjs.gx,10);
+enemy1.friction = 0;
+enemy1.noBounds = true;
+enemy1.setHFlipImages("Images/Minecraft Zombie.png");
+enemy1.onMouseDown(function(){
+enemy1.follow(sjs.mouse);
+enemy1.removeGravity();
+enemy1.stop();
+});
+enemy1.onMouseUp(function(){
+enemy1.unfollow(sjs.mouse);
+enemy1.setGravity();
+enemy1.pushHFacing();
+enemy1.accel=.5;
+});
+}
+
+function enemy2(){
+var enemy2= new sjs.Image("Images/Minecraft Skeleton.png");
+level.push(enemy2);
+enemy2.type = "enemy";
+enemy2.center().offset(-sjs.gx,10);
+enemy2.friction = 0;
+enemy2.noBounds = true;
+enemy2.setHFlipImages("Images/Minecraft Skeleton.png");
+enemy2.onMouseDown(function(){
+enemy2.follow(sjs.mouse);
+enemy2.removeGravity();
+enemy2.stop();
+});
+enemy2.onMouseUp(function(){
+enemy2.unfollow(sjs.mouse);
+enemy2.setGravity();
+enemy2.pushHFacing();
+enemy2.accel=.5;
+});
+}
+
+function enemy3(){
+var enemy3= new sjs.Image("Images/Minecraft Spider-left.png");
+level.push(enemy3);
+enemy3.type = "enemy";
+enemy3.center().offset(-sjs.gx,10);
+enemy3.friction = 0;
+enemy3.noBounds = true;
+enemy3.setHFlipImages("Images/Minecraft Spider-left.png");
+enemy3.onMouseDown(function(){
+enemy3.follow(sjs.mouse);
+enemy3.removeGravity();
+enemy3.stop();
+});
+enemy3.onMouseUp(function(){
+enemy3.unfollow(sjs.mouse);
+enemy3.setGravity();
+enemy3.pushHFacing();
+enemy3.accel=.5;
+});
+}
+
+function enemy4(){
+var enemy4= new sjs.Image("Images/Minecraft Creeper.png");
+level.push(enemy4);
+enemy4.type = "enemy";
+enemy4.center().offset(-sjs.gx,10);
+enemy4.friction = 0;
+enemy4noBounds = true;
+enemy4.setHFlipImages("Images/Minecraft Creeper.png");
+enemy4.onMouseDown(function(){
+enemy4.follow(sjs.mouse);
+enemy4.removeGravity();
+enemy4.stop();
+});
+enemy4.onMouseUp(function(){
+enemy4.unfollow(sjs.mouse);
+enemy4.setGravity();
+enemy4.pushHFacing(); 
+enemy4.accel=.5;
+});
+
+
+
+}; //end enemy function
+
+
+
+
+
+
+</script>
+</head>
+<body onload="start()">
+<h1> Minecraft level maker </h1>
+<center>
+<input type="image" src="Images/Minecraft Block.png" onclick="platform()">
+<input type="image" src="Images/Minecraft sword.png" onclick="powerUp()">
+<input type="image" src="Images/Minecraft House.png" onclick="flag()">
+<input type="image" src="Images/Minecraft Zombie.png" onclick="enemy()">
+<input type="image" src="Images/Minecraft Skeleton.png" onclick="enemy2()">
+<input type="image" src="Images/Minecraft Spider-left.png" onclick="enemy3()">
+<input type="image" src="Images/Minecraft Creeper.png" onclick="enemy4()">
+</center>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+<br/>
+<div id="output" style="margin:0 50 0 50;"></div>
+<br/><br/>
+
+</body>
+</html>
