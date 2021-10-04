@@ -57,6 +57,7 @@ player.pushUp(55);
 sjs.onHit("player","bottom_screen",function(x,y){
 sjs.stoppedBy(x,y);
 if(canJump == false){
+	canJump = true;
 }
 });
 
