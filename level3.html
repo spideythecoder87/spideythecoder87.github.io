@@ -1,0 +1,203 @@
+<html>
+<head>
+<title> An Astronauts's Adventure! </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+<script>
+
+function start(){
+sjs.open("target",800,500);
+
+
+var background = new sjs.Image("Images/Minecraft World.png");
+background.setSize(2500, 500);
+
+
+sjs.loadImageArray('[{"width":36,"height":30,"x":139,"y":470,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":368,"y":264,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":341,"y":285,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":320,"y":303,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":297,"y":322,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":278,"y":344,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":257,"y":370,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":234,"y":390,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":203,"y":414,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":181,"y":432,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":161,"y":455,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":478,"y":181,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":451,"y":204,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":422,"y":226,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":395,"y":246,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":659.0648018777129,"y":180,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":632.0648018777129,"y":181,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":540.0648018777129,"y":182,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":508.06480187771285,"y":180,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":602.0648018777129,"y":181,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":573.0648018777129,"y":182,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":791.104190009182,"y":175,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":758.104190009182,"y":177,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":724.104190009182,"y":177,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":693.104190009182,"y":177,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":1294.0135151264894,"y":465,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":913.0135151264896,"y":467,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":52,"height":71,"x":1164.0135151264894,"y":429,"sx":-1.5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/Minecraft Skeleton.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Skeleton.png","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":80,"x":1525.1936878779807,"y":416,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft House.png","alt":"add text","type":"flag","friction":0.05,"classType":"Image"}]')
+//Player Properties
+var player = new
+sjs.Image("Images/Minecraft Player.png");
+player.type = "player";
+player.setSize(85,93);
+player.setGravity(3);
+player.bottom();
+player.friction = .3;
+player.noBounds = true;
+sjs.scrollable(player,background);
+
+//player controls
+
+
+
+
+sjs.keyDown(RIGHT_KEY, function(){
+
+player.pushRight(2);
+
+
+}); //end Right key
+
+sjs.keyDown(LEFT_KEY, function(){
+
+player.pushLeft(2);
+
+
+}); //end Left key
+
+//Jumping Code
+var canJump = true;
+sjs.keyDown(UP_KEY, function(){
+if(canJump == true){
+canJump = true;
+player.pushUp(55);
+
+} //end canJump if statement
+}); //end keyDown function
+
+sjs.onHit("player","bottom_screen",function(x,y){
+sjs.stoppedBy(x,y);
+if(canJump == false){
+}
+});
+
+sjs.onHit("player",["right_screen","left_screen","top_screen"],function(x,y){
+sjs.stoppedBy(x,y);
+});
+
+sjs.onHit("enemy","bottom_screen", function(x,y){
+sjs.stoppedBy(x,y);
+});
+
+sjs.onHit("enemy",["left_screen","right_screen"], function(x,y){
+sjs.bounceOff(x,y);
+});
+
+sjs.onHit("enemy","platform", function(x,y){
+if(x.isAboveOf(y) == true){
+	sjs.stoppedBy(x,y);
+	} else {
+	sjs.bounceOff(x,y);
+	}
+	});
+
+	sjs.onHit("player","jump_pad", function(x,y){
+if(x.isAboveOf(y) == true){
+	player.pushUp(50);
+	} else {
+	sjs.stoppedBy(x,y);
+	}
+});
+
+
+var lives = 2;
+sjs.onHit("player","enemy", function(x,y){
+	lives = lives - 1;
+	if(lives == 0){
+x.destroy();
+window.location = "game over.html";
+}
+});
+
+sjs.onHit("laser","enemy", function(x,y){
+x.destroy();
+y.destroy();
+});
+
+sjs.onHit("laser",["platform","jump_pad", "powerUp","score","flag"], function(x,y){
+sjs.bounceOff(x,y);
+});
+
+sjs.onHit("laser",["right_screen","left_screen"], function(x,y){
+x.destroy();
+});
+
+
+
+
+
+
+
+
+sjs.onHit("player","platform",function(x,y){
+sjs.stoppedBy(x,y);
+if(canJump == false && x.y < y.y-85){
+canJump = true;
+}
+});
+
+
+sjs.onHit("player",["right_screen","left_screen","top_screen"],function(x,y){
+sjs.stoppedBy(x,y);
+});
+
+
+var canShoot = false;
+sjs.onHit("player","powerUp", function(x,y){
+canShoot = true;
+y.destroy();
+});
+
+
+
+var flagOn = true;
+sjs.onHit("player","flag", function(x,y){
+	x.stop();
+if(flagOn == true){
+flagOn = false;
+setTimeout(function(){
+y.setImage("Images/Minecraft House.png");
+player.destroy();
+},800 );
+setTimeout(function(){
+y.setImage("Images/Minecraft Player in house.png");
+},1600 );
+setTimeout(function(){
+window.location = "win4.html";
+},2400 );
+} //end if statement
+
+});
+
+sjs.keyDown(DOWN_KEY, function(){
+	if(canShoot == true){
+		canShoot = false;
+		var gun = new sjs.Image ("Images/Minecraft player with gun");
+		gun.type = "player";
+		var laser = new sjs.Image("Images/laser.png");
+		laser.type = "laser";
+		laser.setSize(100,50);
+		laser.friction = 0;
+		laser.noBounds = true;
+		if(r_facing == true){
+			laser.moveTo(player.getX()+44,player.getY()+7);
+			laser.pushRight(25.5);
+		} else {
+			laser.moveTo(player.getX()+-60,player.getY()+7);
+			laser.pushLeft(25.5);
+		} 
+		setTimeout(function(){
+			canShoot = true;
+		},1500);
+	} //end canShoot if statement
+}); //end keyDown function DOWN_KEY
+
+
+
+
+
+
+
+
+
+} //end start
+
+
+
+
+</script>
+</head>
+<body onload="start()">
+<h1> An Astronaut's Adventure! </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
