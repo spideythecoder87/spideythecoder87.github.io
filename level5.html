@@ -1,202 +1,116 @@
-<html>
-<head>
-<title> An Astronauts's Adventure! </title>
-<script src="https://simplycodingcourses.com/files/simply.js"></script>
-<script>
-
-function start(){
-sjs.open("target",800,500);
-
-
-var background = new sjs.Image("Images/Minecraft World.png");
-background.setSize(2500, 500);
-
-
-sjs.loadImageArray('[{"width":36,"height":30,"x":1011.9887275743872,"y":468,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":370,"y":366,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":154,"y":467,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":80,"height":80,"x":1621.3791812082854,"y":416,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft House.png","alt":"add text","type":"flag","friction":0.05,"classType":"Image"},{"width":83,"height":57,"x":755,"y":443,"sx":5,"sy":1,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":83,"height":57,"x":919.9887275743872,"y":443,"sx":-5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":83,"height":57,"x":880,"y":443,"sx":5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":83,"height":57,"x":880,"y":443,"sx":5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":83,"height":57,"x":434.9887275743872,"y":443,"sx":-5,"sy":1,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":83,"height":57,"x":204.9887275743872,"y":443,"sx":-5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":36,"height":30,"x":567,"y":342,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":788.9486484125684,"y":349,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"}]')
-//Player Properties
-var player = new
-sjs.Image("Images/Minecraft Player.png");
-player.type = "player";
-player.setSize(85,93);
-player.setGravity(3);
-player.bottom();
-player.friction = .3;
-player.noBounds = true;
-sjs.scrollable(player,background);
-
-//player controls
+<html> 
+<head> 
+<title> Modified Game </title> 
+<script src="https://simplycodingcourses.com/files/simply.js"></script> 
+<script> 
 
 
 
 
-sjs.keyDown(RIGHT_KEY, function(){
+function start(){ 
+  sjs.open("target",900,400); 
 
-player.pushRight(2);
+  
+var background = new sjs.Image("Images/road.png");
+background.setSize(900,400);
 
+var frog = new sjs.Image("Images/frog.png");
+frog.type="player";
+frog.setSize(48,48);
+frog.center().bottom().offset(0,-3);
+frog.noBounds = true;
 
-}); //end Right key
-
-sjs.keyDown(LEFT_KEY, function(){
-
-player.pushLeft(2);
-
-
-}); //end Left key
-
-//Jumping Code
-var canJump = true;
-sjs.keyDown(UP_KEY, function(){
-if(canJump == true){
-canJump = true;
-player.pushUp(55);
-} //end canJump if statement
-}); //end keyDown function
-
-sjs.onHit("player","bottom_screen",function(x,y){
-sjs.stoppedBy(x,y);
-if(canJump == false){
-}
-});
-
-sjs.onHit("player",["right_screen","left_screen","top_screen"],function(x,y){
-sjs.stoppedBy(x,y);
-});
-
-sjs.onHit("enemy","bottom_screen", function(x,y){
-sjs.stoppedBy(x,y);
-});
-
-sjs.onHit("enemy",["left_screen","right_screen"], function(x,y){
-sjs.bounceOff(x,y);
-});
-
-sjs.onHit("enemy","platform", function(x,y){
-if(x.isAboveOf(y) == true){
-	sjs.stoppedBy(x,y);
-	} else {
-	sjs.bounceOff(x,y);
-	}
-	});
-
-	sjs.onHit("player","jump_pad", function(x,y){
-if(x.isAboveOf(y) == true){
-	player.pushUp(50);
-	} else {
-	sjs.stoppedBy(x,y);
-	}
-});
-
-
-var lives = 2;
-sjs.onHit("player","enemy", function(x,y){
-	lives = lives - 1;
-	if(lives == 0){
-x.destroy();
-window.location = "game over.html";
-}
-});
-
-sjs.onHit("laser","enemy", function(x,y){
-x.destroy();
-y.destroy();
-});
-
-sjs.onHit("laser",["platform","jump_pad", "powerUp","score","flag"], function(x,y){
-sjs.bounceOff(x,y);
-});
-
-sjs.onHit("laser",["right_screen","left_screen"], function(x,y){
-x.destroy();
-});
+setInterval(function(){
+  var number = Math.floor(Math.random()*3);
+  if(number == 0) {
+     truck();
+  } else if(number == 1){
+    semi();
+  } else if (number == 2){
+    semitrailer();
+  }
+ },1000);
 
 
 
+ 
 
-
-
-
-
-sjs.onHit("player","platform",function(x,y){
-sjs.stoppedBy(x,y);
-if(canJump == false && x.y < y.y-85){
-canJump = true;
-}
-});
-
-
-sjs.onHit("player",["right_screen","left_screen","top_screen"],function(x,y){
-sjs.stoppedBy(x,y);
-});
-
-
-var canShoot = false;
-sjs.onHit("player","powerUp", function(x,y){
-canShoot = true;
-y.destroy();
-});
-
-
-
-var flagOn = true;
-sjs.onHit("player","flag", function(x,y){
-	x.stop();
-if(flagOn == true){
-flagOn = false;
 setTimeout(function(){
-y.setImage("Images/Minecraft House.png");
-player.destroy();
-},800 );
-setTimeout(function(){
-y.setImage("Images/Minecraft Player in house.png");
-},1600 );
-setTimeout(function(){
-window.location = "win7.html";
-},2400 );
-} //end if statement
+window.addEventListener("keydown", function(e){
+  if(e.keyCode == RIGHT_KEY){
+    frog.moveTo(frog.x + 48, frog.y);
 
+  } else if(e.keyCode == LEFT_KEY){
+    frog.moveTo(frog.x - 48, frog.y);
+  }  else if(e.keyCode == UP_KEY){
+    frog.moveTo(frog.x, frog.y - 48);
+  }  else if(e.keyCode == DOWN_KEY){
+    frog.moveTo(frog.x, frog.y + 48);
+  }
+});
+},1500);
+// colision detection
+
+sjs.onHit("player", "enemy", function(x,y){
+  var m = new sjs.Text("GAME OVER!", 16, "red");
+  m.moveTo(x.x, x.y);
+  m.node.style.backgroundColor = "white";
+  frog.destroy();
+  setTimeout(function(){
+    m.destroy();
+    window.location = "level5.html"
+    frog.center().bottom().offset(0,-3);
+
+  },500)
 });
 
-sjs.keyDown(DOWN_KEY, function(){
-	if(canShoot == true){
-		canShoot = false;
-		var gun = new sjs.Image ("Images/Minecraft player with gun");
-		gun.type = "player";
-		var laser = new sjs.Image("Images/laser.png");
-		laser.type = "laser";
-		laser.setSize(100,50);
-		laser.friction = 0;
-		laser.noBounds = true;
-		if(r_facing == true){
-			laser.moveTo(player.getX()+44,player.getY()+7);
-			laser.pushRight(25.5);
-		} else {
-			laser.moveTo(player.getX()+-60,player.getY()+7);
-			laser.pushLeft(25.5);
-		} 
-		setTimeout(function(){
-			canShoot = true;
-		},1500);
-	} //end canShoot if statement
-}); //end keyDown function DOWN_KEY
-
-
-
-
-
-
-
-
+sjs.onHit("player", "top_screen", function(x,y){
+  var m = new sjs.Text("VICTORY", 26, "green");
+  m.center();
+  setTimeout(function(){
+window.location = "index.html";
+},1000)
+});
 
 } //end start
 
+var y = [70, 155, 245];
 
+function semi() {
+  var getY = Math.floor(Math.random()*y.length);
+  var semint = new sjs.Image("Images/semint.png");
+  semint.type = "enemy";
+  semint.noBounds = true;
+  semint.moveTo(900, y[getY]);
+  semint.setWidth(150);
+  semint.friction = 0;
+  semint.pushLeft(30);
+}
 
+function semitrailer() {
+  var getY = Math.floor(Math.random()*y.length);
+  var semitrailer = new sjs.Image("Images/semiwt.png");
+  semitrailer.type = "enemy";
+  semitrailer.noBounds = true;
+  semitrailer.moveTo(900, y[getY]);
+  semitrailer.setWidth(250);
+  semitrailer.friction = 0;
+  semitrailer.pushLeft(30);
+}
 
-</script>
-</head>
-<body onload="start()">
-<h1> An Astronaut's Adventure! </h1>
-
-<div id="target" style="margin:auto;background:grey;"></div>
-</body>
+function truck() {
+  var getY = Math.floor(Math.random()*y.length);
+  var truck = new sjs.Image("Images/truck.png");
+  truck.type = "enemy";
+  truck.noBounds = true;
+  truck.moveTo(900,y[getY]);
+  truck.setWidth(150);
+  truck.friction = 0;
+  truck.pushLeft(30);
+}
+</script> 
+</head> 
+<body onload="start()"> 
+<div id="target" style="margin:auto;background:white;border:3px solid black"></div> 
+</body> 
 </html>
