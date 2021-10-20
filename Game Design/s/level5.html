@@ -11,9 +11,8 @@ sjs.open("target",800,500);
 var background = new sjs.Image("Images/Minecraft World.png");
 background.setSize(2500, 500);
 
-
 sjs.loadImageArray('[{"width":36,"height":30,"x":1011.9887275743872,"y":468,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":370,"y":366,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":154,"y":467,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":80,"height":80,"x":1621.3791812082854,"y":416,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft House.png","alt":"add text","type":"flag","friction":0.05,"classType":"Image"},{"width":83,"height":57,"x":755,"y":443,"sx":5,"sy":1,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":83,"height":57,"x":919.9887275743872,"y":443,"sx":-5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":83,"height":57,"x":880,"y":443,"sx":5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":83,"height":57,"x":880,"y":443,"sx":5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":83,"height":57,"x":434.9887275743872,"y":443,"sx":-5,"sy":1,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":83,"height":57,"x":204.9887275743872,"y":443,"sx":-5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/Minecraft Spider-left.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Spider-left.png","friction":0,"classType":"Image","noBounds":true},{"width":36,"height":30,"x":567,"y":342,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"},{"width":36,"height":30,"x":788.9486484125684,"y":349,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft Block.png","alt":"add text","type":"platform","friction":0.05,"classType":"Image"}]')
-//Player Properties
+
 var player = new
 sjs.Image("Images/Minecraft Player.png");
 player.type = "player";
@@ -56,6 +55,7 @@ player.pushUp(55);
 sjs.onHit("player","bottom_screen",function(x,y){
 sjs.stoppedBy(x,y);
 if(canJump == false){
+	canJump = true;
 }
 });
 
@@ -151,7 +151,7 @@ setTimeout(function(){
 y.setImage("Images/Minecraft Player in house.png");
 },1600 );
 setTimeout(function(){
-window.location = "win5.html";
+window.location = "win3.html";
 },2400 );
 } //end if statement
 
@@ -201,3 +201,4 @@ sjs.keyDown(DOWN_KEY, function(){
 <div id="target" style="margin:auto;background:grey;"></div>
 </body>
 </html>
+
