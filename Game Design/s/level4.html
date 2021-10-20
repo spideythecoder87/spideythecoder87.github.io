@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <title> An Astronauts's Adventure! </title>
@@ -11,9 +12,8 @@ sjs.open("target",800,500);
 var background = new sjs.Image("Images/Minecraft World.png");
 background.setSize(2500, 500);
 
-
 sjs.loadImageArray('[{"width":80,"height":80,"x":720,"y":417,"sx":0,"sy":0,"topSpeed":10,"src":"Images/Minecraft House.png","alt":"add text","type":"flag","friction":0.05,"classType":"Image"},{"width":35,"height":61,"x":409,"y":439,"sx":-5,"sy":1,"ay":1,"topSpeed":10,"src":"Images/Minecraft Creeper.png","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/Minecraft Creeper.png","friction":0,"classType":"Image"}]')
-//Player Properties
+
 var player = new
 sjs.Image("Images/Minecraft Player.png");
 player.type = "player";
@@ -56,6 +56,7 @@ player.pushUp(55);
 sjs.onHit("player","bottom_screen",function(x,y){
 sjs.stoppedBy(x,y);
 if(canJump == false){
+	canJump = true;
 }
 });
 
@@ -151,7 +152,7 @@ setTimeout(function(){
 y.setImage("Images/Minecraft Player in house.png");
 },1600 );
 setTimeout(function(){
-window.location = "win4.html";
+window.location = "win3.html";
 },2400 );
 } //end if statement
 
