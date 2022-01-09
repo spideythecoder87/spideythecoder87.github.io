@@ -8,7 +8,7 @@ function start(){
 sjs.open("target",800,500);
 
 //Background Music
-var playM = new Audio('Music/Crossing the Chasm.mp3');
+var playM = new Audio('Sound.killers.mp3');
 var toggle = true;
 var musicOn = false;
 sjs.keyDown(SPACE_KEY, function(){
@@ -26,7 +26,6 @@ toggle = true;
 },1000);
 } //end if toggle statement
 }); //end keyDown function
-
 
 var background = new sjs.Image("Images/background.png");
 background.setSize(2500, 500);
