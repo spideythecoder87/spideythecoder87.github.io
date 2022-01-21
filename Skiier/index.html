@@ -1,0 +1,226 @@
+<html> 
+<head> 
+<title> Skiier </title> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://simplycodingcourses.com/files/simply.js"></script> 
+<script> 
+
+  var array = ["Images/skild.png","Images/skid.png","Images/skird.png"];
+  var skipos = 1;
+
+  var records = [localStorage.getItem("wr")];
+  var current_record;
+
+function start(){ 
+  sjs.open("target",500,600); 
+  
+  var background = new sjs.Image("");
+  background.setSize(500, 2500);
+  background.node.style.zIndex = -1;
+
+  console.log(records);
+  console.log(parseFloat(records[0]));
+ 
+  //timer
+  var t = 0;
+  var mili = 0;
+  var t_text = new sjs.Text("Time: " + t,20,"black");
+  t_text.right();
+  t_text.offset(-40,0);
+  t_text.fixed = true;
+  t_text.node.style.zIndex = 10;
+
+  var timer = setInterval(function(){
+    t_text.setText("Time: "+ t +":"+ mili);
+    mili++;
+    localStorage.setItem("seconds", t);
+    localStorage.setItem("mili", mili);
+    if(mili > 9){
+      t++;
+      mili = 0;
+    }
+  },100);
+
+  /* Check to see if first time playing meaning records[0] would be null. 
+  If it is put 100 as the current record and remove the first item. */
+  if(records[0] == null){
+    var wr = 100;
+    localStorage.setItem("wr", wr);
+    current_record = localStorage.getItem("wr");
+    records.push(current_record);
+    records.splice(0,1);
+    // console.log(records);
+  }
+
+
+  var start = new sjs.Image("Images/checkered.png");
+  start.setSize(500,50);
+  start.moveTo(0,100);
+
+  var finish = new sjs.Image("Images/checkered.png");
+  finish.type = "finish";
+  finish.setSize(500,50);
+  finish.moveTo(0,2350);
+
+  var player = new sjs.Image(array[1]);
+  player.type="player";
+  player.centerH();
+  player.offset(0,15);
+  player.friction = .1;
+
+  sjs.scrollable(player, background);
+
+  setInterval(function(){
+    player.adjustSpeed(0,1.1);
+  },100);
+  var p = 1;
+  sjs.keyDown(DOWN_KEY, function(){
+    if(p == 1){
+      player.pushDown(.6);
+      player.setImage(array[1]);
+      skipos = 1;
+    }
+  });
+
+  sjs.keyDown(LEFT_KEY, function(){
+    if(p == 1){
+      player.pushLeft();
+      player.pushDown(.3);
+      if(skipos > 0){
+        skipos = skipos - 1;
+        player.setImage(array[skipos]);
+      } else {
+        skipos = 0;
+      }
+    }
+  });
+
+  sjs.keyDown(RIGHT_KEY, function(){
+    if(p == 1){
+      player.pushRight();
+      player.pushDown(.3);
+      if(skipos >= 0 && skipos != 2){
+        skipos = skipos + 1;
+        player.setImage(array[skipos]);
+      } else {
+        skipos = 2;
+      }
+    }
+  });
+
+  for(var i = 0; i< 35; i++){
+    var x = Math.round(Math.random()*460);
+    var y = Math.round(150+Math.random()*2100);
+    var rocks = new sjs.Image("Images/rocks.png");
+    rocks.type = "rocks";
+    rocks.setSize(20,20);
+    rocks.moveTo(x,y);
+  }
+
+  for(var i = 0; i< 25; i++){
+    var x = Math.round(Math.random()*460);
+    var y = Math.round(150+Math.random()*2100);
+    var trees = new sjs.Image("Images/tree.png");
+    trees.type = "trees";
+    trees.setSize(20,40);
+    trees.moveTo(x,y);
+  }
+
+  sjs.onHit("player",["trees","rocks"], function(x,y){
+    x.setImage("Images/crash.png");
+    x.pushUp(13);
+  });
+
+  sjs.onHit("player","finish",function(x,y){
+     clearInterval(timer);
+     //saving seconds and miliseconds in local storage
+     var s = localStorage.getItem("seconds");
+     var m = localStorage.getItem("mili");
+     
+     //adding the seconds and miliseconds together then adding the decimal.
+     var num = ((s + m)/10).toFixed(1);
+     console.log(((s + m)/10).toFixed(1));
+     // console.log(parseInt(records[0]));
+
+     //restart button
+     var restart = new sjs.Button("Play Again?",function(){
+      window.location = "index.html";
+     });
+     restart.center().offset(0,50);
+
+     /*comparing the current record with the recent finish. ParseFloat converts a string to a decimal integar*/
+     if(parseFloat(records[0]) > num){
+      alert("NEW RECORD");
+      wr = num;
+      t_text.setText("Your Time: "+num);
+      t_text.center();
+      localStorage.setItem("wr",wr);
+      var world_record = new sjs.Text("World Record: "+localStorage.getItem("wr"),26,"green");
+      world_record.moveTo(5,2450);
+      console.log(records);
+     } else {
+      t_text.setText("Your Time: "+num);
+      t_text.center();
+      var world_record = new sjs.Text("World Record: "+localStorage.getItem("wr"),26,"green");
+      world_record.moveTo(5,2450);
+     }
+
+  },.95);
+
+  window.addEventListener("keydown", function(e){
+    if(e.keyCode == P_KEY){
+      alert("pause");
+    }
+  });
+
+  //yeti
+  setTimeout(function(){
+    var yeti = new sjs.Image("Images/yeti.png");
+    yeti.centerH();
+    yeti.setWidth(50);
+    yeti.type="yeti";
+    yeti.friction = .1;
+    setInterval(function(){
+      var dx = player.x - yeti.x;
+      var dy = player.y - yeti.y;
+
+      var angle = Math.atan2(dy, dx);
+
+      yeti.pushRight(1.1*Math.cos(angle));
+      yeti.pushDown(1.1*Math.sin(angle));
+
+    },50);
+  },1500);
+
+  sjs.onHit("player", "yeti", function(x,y){
+    var snowman = new sjs.Image("Images/crash.png");
+    snowman.type="snowman";
+    snowman.moveTo(x.x, x.y);
+    snowman.pushDown();
+    snowman.friction = 0;
+    x.destroy();
+    y.destroy();
+    p = 0;
+    var button = new sjs.Button("Play Again?", function(){
+      window.location = "index.html";
+    });
+    button.center();
+  },.95);
+
+  sjs.onHit("yeti", ["trees","rocks"], function(x,y){
+    y.destroy();
+  });
+
+  sjs.onHit("yeti", "finish",function(x,y){
+    x.destroy();
+  });
+
+
+}
+
+</script> 
+</head> 
+<body onload="start()"> 
+<div id="target" style="margin:auto;background:white;border:3px solid black"></div> 
+</body> 
+</html>
