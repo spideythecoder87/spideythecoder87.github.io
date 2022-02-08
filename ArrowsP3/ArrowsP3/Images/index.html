@@ -1,0 +1,231 @@
+<html>
+	<head>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js"></script> 
+		<script>
+			var r_walk = 1;
+			var l_walk = 1;
+			var d_walk = 1;
+			var u_walk = 1;
+			
+			function start()
+			{
+				sjs.open("target", 800, 500);
+				
+				var background = new sjs.Image("");
+				background.setSize(1000, 800);
+				
+				var mapArray=[
+
+
+				[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,],
+				[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+				[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+				[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+				[1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,],
+				[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+				[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+				[1,0,0,0,0,1,1,0,0,1,1,1,1,0,0,1,0,0,0,0,0,1,0,0,1,],
+				[0,0,0,0,0,1,1,0,0,1,1,1,1,0,0,1,0,0,0,0,0,1,0,0,1,],
+				[0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,1,],
+				[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,],
+				[1,0,0,0,0,1,1,0,0,1,1,1,1,0,0,1,0,0,0,0,0,1,0,0,1,],
+				[1,0,0,0,0,1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,1,0,0,1,],
+				[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+				[1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,],
+				[1,0,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,0,1,],
+				[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+				[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+				[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+				[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,]
+
+
+				]
+
+				var mapX=0;	
+				var mapY=0;
+
+				for(var i=0; i < mapArray.length; i++)
+				{
+					for(var j=0; j < mapArray[i].length; j++)
+					{
+						if(mapArray[i][j] == 0)
+						{
+							var floor = new sjs.Image("woodFloors01.png");
+							floor.type = "floor";
+							floor.setSize(40, 40);
+							floor.moveTo(mapX, mapY);
+						}
+						if(mapArray[i][j] == 1)
+						{	
+							var wall = new sjs.Image("stone01.png");
+							wall.type="wall";
+							wall.setSize(40,40);
+							wall.moveTo(mapX,mapY);
+						}
+						if(mapArray[i][j] == 2)
+						{	
+							//var rail = new sjs.Image("https://hydra-media.cursecdn.com/minecraft.gamepedia.com/1/1e/Rail.png?version=0db43454eccf564812ed5db6ca3db956");
+							//rail.type="rail";
+							//rail.setSize(100,100);
+							//rail.moveTo(mapX,mapY);
+						}
+						if(mapArray[i][j] == 3)
+						{	
+							//var entry = new sjs.Image("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Flag_of_Afghanistan_(1880%E2%80%931901).svg/2000px-Flag_of_Afghanistan_(1880%E2%80%931901).svg.png");
+							//entry.type="entry";
+							//entry.setSize(100,100);
+							//entry.moveTo(mapX,mapY);
+						}
+						mapX+=40;
+					}
+					mapX=0;
+					mapY+=40;
+				}
+				
+				//Shawn
+				var shawn = new sjs.Image("front.png");
+				shawn.type = "shawn";
+				shawn.setSize(33, 52);
+				shawn.moveTo(0, 335);
+				shawn.friction = ".2";
+				sjs.scrollable(shawn,background);
+				
+				sjs.keyDown(RIGHT_KEY, function()
+				{
+					if(r_walk == 1)
+					{
+						shawn.setImage("right.png");
+						shawn.pushRight(1.5);
+						r_walk = 2;
+					}
+					else if(r_walk == 2)
+					{
+						shawn.setImage("right2.png");
+						shawn.pushRight(1.5);
+						r_walk = 3;
+					}
+					else if(r_walk == 3)
+					{
+						shawn.setImage("right3.png");
+						shawn.pushRight(1.5);
+						r_walk = 4;
+					}
+					else if(r_walk == 4)
+					{
+						shawn.setImage("right4.png");
+						shawn.pushRight(1.5);
+						r_walk = 1;
+					}
+					else
+					{
+						r_walk = 1;
+					}
+				});
+				sjs.keyDown(LEFT_KEY, function()
+				{
+					if(l_walk == 1)
+					{
+						shawn.setImage("left.png");
+						shawn.pushLeft(1.5);
+						l_walk = 2;
+					}
+					else if(l_walk == 2)
+					{
+						shawn.setImage("left2.png");
+						shawn.pushLeft(1.5);
+						l_walk = 3;
+					}
+					else if(l_walk == 3)
+					{
+						shawn.setImage("left3.png");
+						shawn.pushLeft(1.5);
+						l_walk = 4;
+					}
+					else if(l_walk == 4)
+					{
+						shawn.setImage("left4.png");
+						shawn.pushLeft(1.5);
+						l_walk = 1;
+					}
+					else
+					{
+						l_walk = 1;
+					}
+				});
+				sjs.keyDown(DOWN_KEY, function()
+				{
+					if(d_walk == 1)
+					{
+						shawn.setImage("front2.png");
+						shawn.pushDown(1.5);
+						d_walk = 2;
+					}
+					else if(d_walk == 2)
+					{
+						shawn.setImage("front.png");
+						shawn.pushDown(1.5);
+						d_walk = 3;
+					}
+					else if(d_walk == 3)
+					{
+						shawn.setImage("front3.png");
+						shawn.pushDown(1.5);
+						d_walk = 4;
+					}
+					else if(d_walk == 4)
+					{
+						shawn.setImage("front4.png");
+						shawn.pushDown(1.5);
+						d_walk = 1;
+					}
+					else
+					{
+						d_walk = 1;
+					}
+				});
+	
+				sjs.keyDown(UP_KEY, function()
+				{
+					if(u_walk == 1)
+					{
+						shawn.setImage("back.png");
+						shawn.pushUp(1.5);
+						u_walk = 2;
+					}
+					else if(u_walk == 2)
+					{
+						shawn.setImage("back2.png");
+						shawn.pushUp(1.5);
+						u_walk = 3;
+					}
+					else if(u_walk == 3)
+					{
+						shawn.setImage("back3.png");
+						shawn.pushUp(1.5);
+						u_walk = 4;
+					}
+					else if(u_walk == 4)
+					{
+						shawn.setImage("back4.png");
+						shawn.pushUp(1.5);
+						u_walk = 1;
+					}
+					else
+					{
+						u_walk = 1;
+					}
+				});//end Shawn
+				
+				//onHits
+				sjs.onHit("shawn", "wall", function(x, y)
+				{
+					sjs.stoppedBy(x, y);
+				});
+				
+			}//end start
+		</script>
+	</head>
+	<body onload = "start()">
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+</html>

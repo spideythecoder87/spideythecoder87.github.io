@@ -1,0 +1,350 @@
+
+<html>
+<head>
+<script src="https://simplycoding.org/files/simplyjs/simply.js"></script> 
+<script>
+var right = 12;
+var left = 8;
+var down = 5;
+var up = 0;
+var fire = true;
+var enemies = [];
+
+var walk = ["Images/back.png","Images/back2.png","Images/back3.png","Images/back4.png","Images/front.png","Images/front2.png","Images/front3.png","Images/front4.png","Images/left.png","Images/left2.png","Images/left3.png","Images/left4.png","Images/right.png","Images/right2.png","Images/right3.png","Images/right4.png",];
+
+function start()
+{
+	sjs.open("target", 800, 520);
+	
+	var background = new sjs.Image("");
+	background.setSize(800, 520);
+	
+	var mapArray=[
+
+
+	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,1,],
+	[1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,],
+	[1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,]
+
+
+	]
+
+	var mapX = 0;	
+	var mapY = 0;
+
+	for(var i=0; i < mapArray.length; i++)
+	{
+		for(var j=0; j < mapArray[i].length; j++)
+		{
+			if(mapArray[i][j] == 0)
+			{
+				var floor = new sjs.Image("Images/bluegrass.png");
+				floor.type = "floor";
+				floor.setSize(40, 40);
+				floor.moveTo(mapX, mapY);
+			}
+			if(mapArray[i][j] == 1)
+			{	
+				var wall = new sjs.Image("Images/Red_blackTree.jpg");
+				wall.type="wall";
+				wall.setSize(40,40);
+				wall.moveTo(mapX,mapY);
+			}
+			if(mapArray[i][j] == 2)
+			{	
+				var wall = new sjs.Image("Images/GreenSpacedTree.jpg");
+				wall.type="wall";
+				wall.setSize(40,40);
+				wall.moveTo(mapX,mapY);
+			}
+			mapX += 40;
+		}
+		mapX = 0;
+		mapY += 40;
+	}
+	
+	//Player
+	var player = new sjs.Image("Images/back.png");
+	player.type = "player";
+	player.setWidth(33);
+	player.center();
+	player.moveTo(400, 460);
+	player.noBounds = true;
+	player.friction = .4;
+	player.lives = 4;
+	var displayHealth = new sjs.Image("");
+	displayHealth.node.style.width = 40;
+	displayHealth.node.style.height = 10;
+	displayHealth.node.style.backgroundColor = "black";
+	displayHealth.node.style.borderRadius = "3px";
+	displayHealth.moveTo(player.x, player.y - 20);
+	displayHealth.follow(player);
+	player.ph = displayHealth;
+
+	sjs.keyDown(RIGHT_KEY, function(){
+		fire = false;
+		player.pushRight(2.5); 
+		player.setImage(walk[right]); 
+		right = right + 1; 
+		if(right == 16){ 
+				right = 12; 
+		}    
+	});
+
+	sjs.keyDown(LEFT_KEY, function(){
+		fire = false;
+		player.pushLeft(2.5); 
+		player.setImage(walk[left]); 
+		left = left + 1; 
+		if(left == 12){ 
+				left = 8; 
+		}   
+	});
+	sjs.keyDown(DOWN_KEY, function()
+	{
+		fire = false;
+		player.pushDown(2.5); 
+		player.setImage(walk[down]); 
+		down = down + 1; 
+		if(down == 8){ 
+				down = 4; 
+		}   
+	});
+
+	sjs.keyDown(UP_KEY, function(){
+		fire = false;
+		player.pushUp(2.5); 
+		player.setImage(walk[up]); 
+		up = up + 1; 
+		if(up == 4){ 
+			up = 0; 
+		}   
+	});//end player
+	
+	var blast = setInterval(function(){
+		shoot(player, player.x, player.y);
+	},500);
+
+	var em = setInterval(function(){
+		enemyMovement(player);
+	},500);
+
+	window.addEventListener("keyup", function(e){
+		if(e.keyCode == RIGHT_KEY || e.keyCode == LEFT_KEY || e.keyCode == UP_KEY  || e.keyCode == DOWN_KEY ){
+			fire = true;
+		}
+	});
+
+	//Enemies
+	var e1 = new sjs.Image("Images/evilBat.gif");
+	e1.type = "enemies";
+	e1.setHeight(80);
+	e1.left().offset(50,350);
+	enemies.push(e1);
+	e1.friction = .2;
+	e1.lives = 10;
+	var displaye1Health = new sjs.Image("");
+	displaye1Health.node.style.width = 40;
+	displaye1Health.node.style.height = 10;
+	displaye1Health.node.style.backgroundColor = "black";
+	displaye1Health.node.style.borderRadius = "3px";
+	displaye1Health.moveTo(e1.x+10, e1.y - 17);
+	displaye1Health.follow(e1);
+	e1.ph = displaye1Health;
+
+	var e2 = new sjs.Image("Images/evilWalnut.gif");
+	e2.type = "enemies";
+	e2.setHeight(80);
+	e2.center().offset(-70,-200);
+	enemies.push(e2);
+	e2.friction = .2;
+	e2.lives = 10;
+	var displaye2Health = new sjs.Image("");
+	displaye2Health.node.style.width = 40;
+	displaye2Health.node.style.height = 10;
+	displaye2Health.node.style.backgroundColor = "black";
+	displaye2Health.node.style.borderRadius = "3px";
+	displaye2Health.moveTo(e2.x+10, e2.y - 17);
+	displaye2Health.follow(e2);
+	e2.ph = displaye2Health;
+
+	var e3 = new sjs.Image("Images/evilBat.gif");
+	e3.type = "enemies";
+	e3.setHeight(80);
+	e3.right().offset(-140,150);
+	enemies.push(e3);
+	e3.friction = .2;
+	e3.lives = 10;
+	var displaye3Health = new sjs.Image("");
+	displaye3Health.node.style.width = 40;
+	displaye3Health.node.style.height = 10;
+	displaye3Health.node.style.backgroundColor = "black";
+	displaye3Health.node.style.borderRadius = "3px";
+	displaye3Health.moveTo(e3.x+10, e3.y - 17);
+	displaye3Health.follow(e3);
+	e3.ph = displaye3Health;
+
+	//onHits
+	sjs.onHit(["player","enemies"], ["bottom_screen","wall"], function(x, y){
+		sjs.stoppedBy(x, y);
+	});
+
+	sjs.onHit(["arrow","poison"], ["bottom_screen","wall"], function(x, y){
+		x.destroy();
+	});
+
+	sjs.onHit("player",["poison","enemies"], function(x,y){
+		if(y.type == "poison"){
+			y.destroy();
+		}
+		sjs.bounceOff(x,y);
+		x.lives--;
+		displayHealth.node.style.width = x.lives * 10;
+		if(x.lives <= 0){
+			x.destroy();
+			x.ph.destroy();
+			clearInterval(blast);
+			clearInterval(em);
+			var button = new sjs.Button("Again?", function(){
+				window.location = "index.html";
+			});		
+			button.center();
+		}
+	},0,0,500);
+
+	sjs.onHit("enemies","arrow",function(x,y){
+		y.destroy();
+		x.lives--;
+		displaye1Health.node.style.width = x.lives * 5;
+		displaye2Health.node.style.width = x.lives * 4;
+		displaye3Health.node.style.width = x.lives * 5;
+		if(x.lives <= 0){
+			x.destroy();
+			x.ph.destroy();
+			sjs.removeFromArray(enemies, x);
+			if(enemies.length == 0){
+				clearInterval(blast);
+				clearInterval(em);
+				fire = false;
+				var button = new sjs.Button("Again?", function(){
+					window.location = "index.html";
+				});		
+				button.center();
+			}
+		}
+	});
+
+
+}//end start
+
+function shoot(player, playerx, playery){
+	if(fire == true){
+		var arrow = new sjs.Image("Images/throwingStar.png");
+		arrow.type = "arrow";
+		arrow.setSize(30,30);
+		arrow.moveTo(playerx, playery);
+		arrow.friction = 0;
+
+		//Find the closest Enemy
+		var closestEnemy = 0;
+		var firstEnemy = Math.sqrt(Math.pow(playerx - enemies[0].x, 2) + Math.pow(playery - enemies[0].y, 2));
+		var winningEnemy;
+
+		for(i in enemies){
+			winningEnemy = Math.sqrt(Math.pow(playerx - enemies[i].x, 2) + Math.pow(playery - enemies[i].y, 2));
+
+			if(winningEnemy < firstEnemy){
+				firstEnemy = winningEnemy;
+				closestEnemy = i;
+			}
+		}
+
+		//Shoot at the winner
+		var dx = enemies[closestEnemy].x - playerx;
+		var dy = enemies[closestEnemy].y - playery;
+		var angle = Math.atan2(dy, dx);
+
+		arrow.pushRight(12*Math.cos(angle));
+		arrow.pushDown(12*Math.sin(angle));
+	
+	}
+} //end function shoot
+
+function enemyMovement(player){
+	var rand = Math.round(Math.random()*3);
+	var jump = Math.round(2+Math.random()*4);
+	for(j in enemies){
+		if(Math.random() < 0.5){
+			enemies[j].pushRight(rand);
+		} else {
+			enemies[j].pushLeft(rand);
+		}
+		if(Math.abs(enemies[j].y - player.y) < 250){
+			if(Math.random() < 0.5){
+				enemies[j].pushUp(jump);
+			} else {
+				enemies[j].pushDown(jump);
+			}
+		}
+	}
+
+	if(Math.random() > 0.70){
+		var randEnemy = Math.floor(Math.random()*enemies.length);
+		for(var k = 0; k < 8; k++){
+			var poison = new sjs.Image("Images/evilPoison.png");
+			poison.type = "poison";
+			poison.setSize(25,25);
+			poison.friction = 0;
+			poison.noBounds = true;
+			poison.moveTo(enemies[randEnemy].x, enemies[randEnemy].y);
+			switch(k){
+				case 0:
+					poison.pushLeft(8);
+					break;
+				case 1:
+					poison.pushUp(8);
+					break;
+				case 2:
+					poison.pushDown(8);
+					break;
+				case 3:
+					poison.pushRight(8);
+					break
+				case 4:
+					poison.pushUp(8);
+					poison.pushLeft(8);
+					break;
+				case 5:
+					poison.pushUp(8);
+					poison.pushRight(8);
+					break;	
+				case 6:
+					poison.pushDown(8);
+					poison.pushRight(8);
+					break;
+				case 7:
+					poison.pushDown(8);
+					poison.pushLeft(8);
+					break;
+			}
+		}
+	}
+
+} //end function enemy movements
+
+</script>
+</head>
+<body onload = "start()">
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
