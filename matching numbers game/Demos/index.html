@@ -1,0 +1,87 @@
+<html> 
+<head> 
+<title> matching numbers </title> 
+<script src="https://simplycodingcourses.com/files/simply.js"></script> 
+<script> 
+
+var array = ["Images/2_block.jpg","Images/3_block.jpg","Images/6_block.jpg","Images/12_block.jpg","Images/24_block.jpg","Images/48_block.jpg","Images/96_block.jpg","Images/192_block.jpg"];
+
+function start(){ 
+  sjs.open("target",900,400); 
+
+  var background = new sjs.Image("Images/river.jpg");
+  background.setSize(900,400);
+
+  var player = new sjs.Image("Images/1_block.jpg");
+  player.type="player";
+  player.setSize(100,100);
+  player.moveTo(800,0);
+  player.num = 0;
+
+  window.addEventListener("keydown",function(e){
+  	if(e.keyCode == DOWN_KEY){
+  		player.moveTo(player.x, player.y+100);
+  	}
+  });
+
+  window.addEventListener("keydown",function(e){
+		if(e.keyCode == UP_KEY){
+			player.moveTo(player.x, player.y-100);
+		}
+  });
+
+  var blocks = new sjs.Image(array[0]);
+	blocks.type = "blocks";
+	blocks.setSize(100,100);
+	blocks.friction = 0;
+	blocks.pushRight(7);
+	blocks.noBounds = true;
+	blocks.num = 0;
+
+  setInterval(function(){
+  	var random = Math.floor(Math.random()*array.length);
+  	var blocks = new sjs.Image(array[random]);
+  	blocks.type = "blocks";
+  	blocks.setSize(100,100);
+  	blocks.friction = 0;
+  	blocks.pushRight(7);
+  	blocks.noBounds = true;
+  	blocks.num = random;
+  	blocks.moveTo(0, Math.floor(Math.random()*4)*100);
+  },700);
+
+  sjs.onHit("blocks", "right_screen", function(x,y){
+  	x.destroy();
+  });
+
+  sjs.onHit("player", "blocks", function(x,y){
+  	if(x.num == y.num){
+  		x.setImage(array[y.num + 1]);
+  		y.destroy();
+  		x.num = x.num + 1;
+  		if(x.num == array.length){
+  			alert("You Win!");
+  			window.location = "index.html";
+  		}
+  	} else if(x.num > y.num){
+  		x.setImage(array[y.num]);
+  		y.destroy();
+  		x.num = y.num;
+  	} else if(x.num < y.num){
+  		x.setImage(array[x.num -1]);
+  		y.destroy();
+  		x.num = x.num -1;
+  		if(x.num <= -1){
+  			alert("You Lose!");
+  			window.location = "index.html";
+  		}
+  	}
+  });
+  
+} //end start 
+</script> 
+</head> 
+<body onload="start()"> 
+<div id="target" style="margin:auto;background:white;border:3px solid black"></div> 
+</body> 
+</html>

@@ -1,0 +1,88 @@
+<html> 
+<head> 
+<title> Platform Game </title> 
+<script src="https://simplycodingcourses.com/files/simply.js"></script> 
+<script src="DEVELOPER.js"></script> 
+<script> 
+
+var blocks = 0;
+var array = [];
+
+function start(){ 
+  sjs.open("target",400,400); 
+  
+  var one = new sjs.Image("Images/1_block.jpg");
+  one.type = "one";
+  array.push(one);
+
+  for(var a = 0; a < array.length; a++){
+  	array[a].setSize(100, 100);
+  }
+
+ 	// one.node.style.zIndex = -1;
+  // two.node.style.zIndex = -1;
+  // three.node.style.zIndex = -1;
+
+  window.addEventListener("keydown", function(e){ 
+  	if(e.keyCode == RIGHT_KEY ){
+  		for(var i = 0;i < array.length;i++){
+  			array[i].moveTo(array[i].x + 100, array[i].y);
+  		}
+  	}
+  	if(blocks <= 10){
+  		blocks++;
+	  	for(var b = 0; b < array.length; b++){
+	  		if(array[b].x != 0 & array[b].y != 0){
+	  			var newOne = new sjs.Image("Images/1_block.jpg");
+	  			newOne.setSize(100,100);
+	  			newOne.type="newOne";
+	  			blocks++;
+	  			array.push(newOne);
+	  		}
+	  	}
+  	}
+  });
+
+  window.addEventListener("keydown", function(e){ 
+  	if(e.keyCode == DOWN_KEY ){
+  		for(var i = 0;i < array.length;i++){
+  			array[i].moveTo(array[i].x, array[i].y + 100);
+  		}
+  	}
+  });
+
+  // sjs.onHit("one", "newOne", function(x, y){
+  // 	var newTwo = new sjs.Image("2_block.jpg");
+		// newTwo.setSize(100,100);
+		// newTwo.type="newTwo";
+		// newTwo.moveTo(x.x, x.y);
+		// array.push(newTwo);
+		// blocks--;
+		// x.destroy();
+  // 	y.destroy();
+  // },0,0,100);
+
+  // sjs.onHit("newOne", "newTwo", function(x, y){
+  // 	var newThree = new sjs.Image("3_block.jpg");
+		// newThree.setSize(100,100);
+		// newThree.type="newThree";
+		// newThree.moveTo(x.x, x.y);
+		// array.push(newThree);
+		// blocks--;
+		// x.destroy();
+  // 	y.destroy();
+  // },0,0,100);
+
+  // sjs.onHit("newOne", ["newThree"], function(x,y){
+  // 	sjs.stoppedBy(x,y);
+  // });
+
+
+  
+} //end start 
+</script> 
+</head> 
+<body onload="start()"> 
+<div id="target" style="margin:auto;background:white;border:3px solid black"></div> 
+</body> 
+</html>
